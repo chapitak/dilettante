@@ -51,7 +51,7 @@ auth: {
     local: {
       endpoints: {
         login: { url: 'auth/local', method: 'post', propertyName: 'jwt' },
-        user: { url: 'users/me', method: 'get', propertyName: 'data' },
+        user: { url: 'users/me', method: 'get', propertyName: '' },
         logout: false
       }
     }

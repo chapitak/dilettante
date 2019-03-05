@@ -66,13 +66,15 @@ export default {
   methods: {
     async login() {
       try {
-        await this.$auth.loginWith('auth/local', {
-            "identifier": this.email,
-            "password": this.password          
+        await this.$auth.loginWith('local', {
+          data:{
+            identifier: this.email,
+            password: this.password          
+          }
         })
         this.$router.push('/')
       } catch (e) {
-        this.error = e.response.message
+        this.error = e.response.data.message
       }
     }
   }
