@@ -1,7 +1,7 @@
 190305
 
 https://scotch.io/tutorials/implementing-authentication-in-nuxtjs-app
-이식중. 
+이식중. 이 링크가 당분간 나의 준거가 되어주어야 한다. 
 
 0932
 너무 잘되고 있다. 이제 vuex에 저장하는 state쪽만 맞추면 됨. 

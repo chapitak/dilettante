@@ -12,7 +12,7 @@ module.exports = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
 	  {
-			//rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css' 
+			rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css' 
 		}
     ]
   },
@@ -40,27 +40,22 @@ module.exports = {
   },
   modules: [
   '@nuxtjs/axios',
-  '@nuxtjs/auth',
-  '@nuxtjs/vuetify'
-  ],
-  axios: {
-    baseURL: 'http://jeongkyo.kim:1337/'
-  },
+  '@nuxtjs/auth'
+],
+axios: {
+  baseURL: 'http://jeongkyo.kim:1337/'
+},
 
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          login: { url: 'auth/local', method: 'post', propertyName: 'jwt' },
-          user: { url: 'users/me', method: 'get', propertyName: '' },
-          logout: false
-        }
+auth: {
+  strategies: {
+    local: {
+      endpoints: {
+        login: { url: 'auth/local', method: 'post', propertyName: 'jwt' },
+        user: { url: 'users/me', method: 'get', propertyName: '' },
+        logout: false
       }
     }
-  },
-  vuetify: {
-    // Vuetify options
-    //  theme: { }
   }
+}
 }
 
