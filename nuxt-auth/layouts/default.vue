@@ -54,9 +54,9 @@
       </v-navigation-drawer>
       <v-toolbar color="amber" app absolute clipped-left dense>
         <v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
-        <span class="title ml-3 mr-5">Dilettante&nbsp;</span>
+        <nuxt-link to="/" tag="div" style="cursor:pointer;"><span class="title ml-3 mr-5">Dilettante&nbsp;</span></nuxt-link>
         <v-spacer></v-spacer>
-        <nuxt-link class="navbar-item" to="/SignIn">Sign In</nuxt-link>
+        <nuxt-link class="navbar-item" to="/SignIn" tag="span" style="cursor:pointer;">Sign In</nuxt-link>
       </v-toolbar>
       <v-content>
         <v-container fluid fill-height class="grey lighten-4">

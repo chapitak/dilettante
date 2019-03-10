@@ -12,3 +12,13 @@ https://scotch.io/tutorials/implementing-authentication-in-nuxtjs-app
 일단 로컬에서의 로그인을 완성한 셈이다. 
 여기서 vuetify를 설치하고, 로그인 기능을 좀 더 폴리싱하자. 마치 로그인만을 위한 웹사이트처럼! 
 
+## 190306
+
+0847
+1. sign in 화면으로 이동하는 화면 만들기
+-> nuxt link가 못생기게 보이는데, 이건 기본적으로 a 태그를 생성하기 때문이다.  by adding a prop (tag="li") to the <router-link> 라고 했다. 태그 prop을 추가할 수 있다이렇게. 
+
+더 나은 방법이 있을 것 같다. programmable이나.. 
+
+2. 로그인 화면 만들기
+- 메일주소와 비밀번호로 로그인하게 해야겠다. 
