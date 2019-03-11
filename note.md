@@ -22,3 +22,7 @@ https://scotch.io/tutorials/implementing-authentication-in-nuxtjs-app
 
 2. 로그인 화면 만들기
 - 메일주소와 비밀번호로 로그인하게 해야겠다. 
+- 되는데서 복붙했다. 수정하기. 
+
+- menu로 navbar만들기
+    - 잘 안만들어진다. v-on directive가 문제라고 말한다. 원인파악이안된다. 

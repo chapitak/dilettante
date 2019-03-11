@@ -56,7 +56,36 @@
         <v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
         <nuxt-link to="/" tag="div" style="cursor:pointer;"><span class="title ml-3 mr-5">Dilettante&nbsp;</span></nuxt-link>
         <v-spacer></v-spacer>
-        <nuxt-link class="navbar-item" to="/SignIn" tag="span" style="cursor:pointer;">Sign In</nuxt-link>
+        <div v-if="isAuthenticated">
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                color="primary"
+                dark
+                v-on="on"
+              >
+                Dropdown
+              </v-btn>
+            </template>
+            <v-list>  
+              <v-list-tile
+                v-for="(item, index) in menuItems"
+                :key="index"
+                @click=""
+              >
+                <v-list-tile-title>{{ menuItems.title }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+          <div class="navbar-dropdown">
+            <nuxt-link class="navbar-item" to="/profile">My Profile</nuxt-link>
+            <hr class="navbar-divider">
+            <a class="navbar-item" @click="logout">Logout</a>
+          </div>
+        </div>
+
+        
+        <nuxt-link v-else class="navbar-item" to="/SignIn" tag="span" style="cursor:pointer;">Sign In</nuxt-link>
       </v-toolbar>
       <v-content>
         <v-container fluid fill-height class="grey lighten-4">
@@ -72,6 +101,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -91,10 +121,24 @@ export default {
       { icon: 'help', text: 'Help' },
       { icon: 'phonelink', text: 'App downloads' },
       { icon: 'keyboard', text: 'Keyboard shortcuts' }*/
+    ],
+    menuItems: [
+      { title: 'Click Me' },
+      { title: 'Click Me' },
+      { title: 'Click Me' },
+      { title: 'Click Me 2' }
     ]
   }),
   props: {
     source: String
+  },
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  },
+  methods: {
+    async logout() {
+      await this.$auth.logout();
+    },
   }
 }
 </script>
