@@ -60,28 +60,26 @@
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
               <v-btn
-                color="primary"
-                dark
+                flat
                 v-on="on"
+                class="pa-1"
               >
-                Dropdown
+                안녕! {{ loggedInUser.username }}
               </v-btn>
             </template>
             <v-list>  
               <v-list-tile
-                v-for="(item, index) in menuItems"
+                v-for="(menuitem, index) in menuItems"
                 :key="index"
-                @click=""
+                @click="move(menuitem.value)"
               >
-                <v-list-tile-title>{{ menuItems.title }}</v-list-tile-title>
+                <v-list-tile-title>{{ menuitem.title }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-menu>
-          <div class="navbar-dropdown">
-            <nuxt-link class="navbar-item" to="/profile">My Profile</nuxt-link>
-            <hr class="navbar-divider">
-            <a class="navbar-item" @click="logout">Logout</a>
-          </div>
+          <!--<nuxt-link class="navbar-item" to="/profile">My Profile</nuxt-link>
+          <a class="navbar-item" @click="logout">Logout</a>-->
+          
         </div>
 
         
@@ -123,10 +121,8 @@ export default {
       { icon: 'keyboard', text: 'Keyboard shortcuts' }*/
     ],
     menuItems: [
-      { title: 'Click Me' },
-      { title: 'Click Me' },
-      { title: 'Click Me' },
-      { title: 'Click Me 2' }
+      { title: 'Profile', value: "Profile" },
+      { title: 'Sign Out', value: "logout" }
     ]
   }),
   props: {
@@ -137,8 +133,16 @@ export default {
   },
   methods: {
     async logout() {
-      await this.$auth.logout();
+      await this.$auth.logout();//여기서 async 쓴 것은 navbar에서 즉각 업데이트 해주기 위함인 것처럼 보인다... 
     },
+    move(target) {
+      if(target == "logout"){
+        this.logout()
+      }
+      else {
+        this.$router.push(target)
+      }
+    }
   }
 }
 </script>
