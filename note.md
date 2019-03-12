@@ -50,13 +50,13 @@ https://scotch.io/tutorials/implementing-authentication-in-nuxtjs-app
 4. agency
 
 - rate
-- review
+- review(text, md)
 
 - inserted_date
 - modified_date
 - author
 - comment(관계)
-- 
+- reco(추천)
 
 
 
