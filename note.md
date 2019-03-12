@@ -26,3 +26,57 @@ https://scotch.io/tutorials/implementing-authentication-in-nuxtjs-app
 
 - menu로 navbar만들기
     - 잘 안만들어진다. v-on directive가 문제라고 말한다. 원인파악이안된다. 
+
+##190311
+- 혹시. 로그인 request의 brutal force 해킹시도에 strapi는 어떠헥 대처하는가? 
+    - 뭔가 있긴 있는 것 같다. 
+- 좋아. 이제 구현이다. 
+
+스키마 추출
+
+파싱해야하는데. 
+
+- id
+- album_id
+- album_name
+- artist_id
+- artist_name
+- thumbnail
+- url
+
+1. released_date
+2. genre
+3. label
+4. agency
+
+- rate
+- review
+
+- inserted_date
+- modified_date
+- author
+- comment(관계)
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

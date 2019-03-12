@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <div class="container">
-      <h1 class="title">Sign In</h1>
+      <h2 class="title">Sign In</h2>
       <Notification :message="error" v-if="error"/>
         <form method="post" @submit.prevent="login">
           <div class="field">

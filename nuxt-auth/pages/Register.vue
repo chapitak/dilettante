@@ -3,52 +3,53 @@
 <template>
   <section class="section">
     <div class="container">
-      <div class="columns">
-        <div class="column is-4 is-offset-4">
-          <h2 class="title has-text-centered">Register!</h2>
+      <div>
+        <h2 class="title has-text-centered">Register!</h2>
 
-          <Notification :message="error" v-if="error"/>
+        <Notification :message="error" v-if="error"/>
 
-          <form method="post" @submit.prevent="register">
-            <div class="field">
-              <v-text-field
-                v-model="username"
-                :rules="nameRules"
-                :counter="10"
-                label="Username"
-                required
-              ></v-text-field>
-            </div>
-            <div class="field">
-              <v-text-field
-                v-model="email"
-                :rules="emailRules"
-                label="E-mail"
-                required
-              ></v-text-field>
-            </div>
-            <div class="field">
-              <label class="label">Password</label>
-              <div class="control">
-                <input
-                  type="password"
-                  class="input"
-                  name="password"
-                  v-model="password"
-                  required
-                >
-              </div>
-            </div>
-            <div class="control">
-              <button type="submit" class="button is-dark is-fullwidth">Register</button>
-            </div>
-          </form>
-
-          <div class="has-text-centered" style="margin-top: 20px">
-            Already got an account? <nuxt-link to="/login">Login</nuxt-link>
+        <form method="post" @submit.prevent="register">
+          <div class="field">
+            <v-text-field
+              v-model="username"
+              :rules="nameRules"
+              :counter="10"
+              label="Username"
+              required
+            ></v-text-field>
           </div>
+          <div class="field">
+            <v-text-field
+              v-model="email"
+              :rules="emailRules"
+              label="E-mail"
+              required
+            ></v-text-field>
+          </div>
+          <div class="field">
+            <div class="field">
+              <v-text-field
+                v-model="password"
+                :append-icon="show1 ? 'visibility' : 'visibility_off'"
+                :rules="[rules.required]"
+                :type="show1 ? 'text' : 'password'"
+                name="input-10-1"
+                label="Password"
+                @click:append="show1 = !show1"
+            ></v-text-field>
+          </div>
+          </div>
+          <div class="control">
+            <v-btn type="submit" class="mr-0" style="display:block;float:right;">Register</v-btn>
+          </div>
+        </form>
+        <br>
+        <br>
+        <div class="has-text-centered" style="margin-top: 20px">
+          Already got an account? <nuxt-link to="/SignIn">Login</nuxt-link>
         </div>
       </div>
+    
     </div>
   </section>
 </template>
@@ -74,7 +75,10 @@ export default {
       emailRules: [
         v => !!v || 'E-mail is required',
         v => /.+@.+/.test(v) || 'E-mail must be valid'
-      ]
+      ],
+      rules: {
+        required: value => !!value || 'Required.',
+      },
     }
   },
 
