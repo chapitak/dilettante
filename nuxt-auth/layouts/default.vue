@@ -39,6 +39,7 @@
             <v-list-tile
               :key="i"
               v-else
+              @click="move(item.value)"
             >
               <v-list-tile-action>
                 <v-icon>{{ item.icon }}</v-icon>
@@ -83,7 +84,7 @@
         </div>
 
         
-        <nuxt-link v-else class="navbar-item" to="/SignIn" tag="span" style="cursor:pointer;">Sign In</nuxt-link>
+        <nuxt-link v-else class="navbar-item" to="/sign-in" tag="span" style="cursor:pointer;">Sign In</nuxt-link>
       </v-toolbar>
       <v-content>
         <v-container fluid fill-height class="grey lighten-4">
@@ -105,7 +106,7 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      { icon: 'lightbulb_outline', text: 'Notes' }
+      { icon: 'album', text: 'Music', value: 'album' }
       /*{ icon: 'touch_app', text: 'Reminders' },
       { divider: true },
       { heading: 'Labels' },

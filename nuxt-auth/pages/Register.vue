@@ -46,7 +46,7 @@
         <br>
         <br>
         <div class="has-text-centered" style="margin-top: 20px">
-          Already got an account? <nuxt-link to="/SignIn">Login</nuxt-link>
+          Already got an account? <nuxt-link to="/sign-in">Login</nuxt-link>
         </div>
       </div>
     
