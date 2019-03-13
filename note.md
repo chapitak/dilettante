@@ -61,6 +61,26 @@ https://scotch.io/tutorials/implementing-authentication-in-nuxtjs-app
 
 
 
+새로 화면 만들고
+정보 가져오는 화면 만들기. 파싱은? 
+AddAlbumReview
+
+default 약간 변경. 
+텍스트 박스의 크기를 늘리고싶음. 
+문제가 뭘까? shrink다. v-flex의 shrink를 일단 빼고, 필요한 데서만 쓰도록 하자. 
+
+ࠀɄ 4:25 2019-03-13
+그러기가 또 애매하네.. 
+헉 졸리다.. 
+그냥 넣고싶은데 잘 안된다. 
+한 줄씩 넣을까? 
+그냥 그래야겠다. 
+일단...
+grid가 뜻대로 안된다. 내가 파악하는 것이 우선인 것 같다. 파악하지 않으면 프레임워크는 쓸모가 없다. 우선 내가 알고있는 responsive의 뜻이 있다. 작동하는 사례를 가지고 생각해보자. 
+
+비밀을 푼 것 같다. 일단 v-layout에 row wrap이라는 attr이 있어야 하는 것처럼 보인다. 
+
+
 
 
 
