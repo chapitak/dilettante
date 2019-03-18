@@ -88,12 +88,119 @@ grid가 뜻대로 안된다. 내가 파악하는 것이 우선인 것 같다. �
 스키마 넣자. album으로. 이거 다되면 freedb에서 작업하자. 불편함을 느끼면 만들어도 될 듯. 
 몇 개의 후보. freedb, discorgs, musicbrainz, spotify,  등등... 
 
+헐.. 글고보니 album 객체와 review 객체가 분리되어 있어야 한다. 그 생각을 못했네.. 
+
+album 객체
+review는 통일될 수 있나? -> 있다. 
+메타데이터를 쭉 땡겨오고 먼저 저장. 그 다음 리뷰 저장. 
 
 
 
+ ࠀɄ 1:49 2019-03-18
+ [album]
+- id
+- album_id
+- album_name
+- artist_id
+- artist_name
+- thumbnail
+- url
 
+1. released_date
+2. genre
+3. label
+4. agency
 
+- created_date
 
+ ----
+ 딱 여기까지 
+ [review]
+ album_id
+ rate
+ review_title
+ review_text
+ author
+ created_date
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+- id
+- album_id
+- album_name
+- artist_id
+- artist_name
+- thumbnail
+- url
+
+1. released_date
+2. genre
+3. label
+4. agency
+
+- rate
+- review(text, md)
+
+- inserted_date
+- modified_date
+- author
+- comment(관계)
+- reco(추천)
+
+----
+ࠀɄ 3:46 2019-03-18
+여기서 이제 작성하면, 입력되고, 조회하면, 조회돼야 한다. 
+1. 타임라인 만들기. 
+2. 개인별 
+
+https://jongmin92.github.io/2017/05/26/Emily/4-crawling/
+참고하기. 모듈들이 필요하다. 근데 이거 했었는데 어디서 했더라... 
+
+request하기 만들기. 
+post해야하는데 axios로 해야겠지
+
+--
+생각. userid에 맞는 review를 불러오고 거기서 id가 albumid와 맞는 데이터들을 쭉 불러와야 하는데 어떻게해야하는지... 쿼리를 짤 수 없으니 영 답답하다. 
+
+적합한 query를 짜야한다. 
+아.. 이제 좀 알겠다. strapi의 relation이 있는 이유가 있다. mongodb에는 중복된 데이터가 있어야 한다. 
+
+https://docs.scaphold.io/tutorials/advanced-queries/
+여기 join같은걸 하는게 있는거같다. 
+그냥.. 무조건 graphql을 쓴다고 보는게 맞는 것 같다. 1:1 관계를 빡세게 짜서. 
+
+ࠀɄ 5:10 2019-03-18
+ok 이제 다시 조금 이해했다. 무조건 일대일관계 중심으로 해결해야한다. 일단 이걸 다 짜놓고 다른 장르를 생각하든가.. 하자. 
+
+1. graphql로 create하기. 
+- 우선 playground에 쿼리부터 짜보기. 
+- 신규album등록 쿼리 
+mutation {
+  createAlbum(input: {
+    data: {
+      album_id: "John",
+      album_name: "john@doe.com"
+    }
+  }) {
+    album {
+      album_id
+      album_name
+    }
+  }
+}
+
+오.. 만들었다. 위처럼 하면 된다. 
+문제 1. graphql로 할 때는 서버단 처리를 어떻게 하나?
+https://strapi.io/documentation/3.x.x/guides/graphql.html#customise-the-graphql-schema 에서 
+Apply permissions on a query 부분을 살피자!
+ 
+ 
+ 
+ 
 
 
 

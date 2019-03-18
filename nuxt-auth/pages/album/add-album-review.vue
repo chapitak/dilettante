@@ -5,6 +5,7 @@
       <div>
         
     <v-container>
+    <form method="post" @submit.prevent="create">
       <v-layout row wrap>
         <v-flex
         xs12
@@ -102,10 +103,24 @@
           hint="작성해주세요."
         ></v-textarea>
         </v-flex>
-      
       </v-layout>
+      <div class="control">
+            <v-btn type="submit" style="display:block;float:right;">Register</v-btn>
+          </div>
+          </form>
     </v-container>
       </div>
     </div>
   </section>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  middleware: 'auth',
+  computed: {
+    ...mapGetters(['loggedInUser'])
+  }
+}
+</script>
