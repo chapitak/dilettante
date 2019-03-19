@@ -183,12 +183,32 @@ mutation {
   createAlbum(input: {
     data: {
       album_id: "John",
-      album_name: "john@doe.com"
+      album_name: "john@doe.com",
+      artist_id: "john@doe.com",
+      artist_name: "john@doe.com",
+      thumbnail: "john@doe.com",
+      url: "john@doe.com",
+      released_date: "1992/04/16",
+      genre: "john@doe.com",
+      label: "john@doe.com",
+      agency: "john@doe.com",
+      created_user: "john@doe.com",
+      created_date: "1992/04/16"
     }
   }) {
     album {
       album_id
       album_name
+      artist_id
+      artist_name
+      thumbnail
+      url
+      released_date
+      genre
+      label
+      agency
+      created_user
+      created_date
     }
   }
 }
@@ -198,6 +218,8 @@ mutation {
 https://strapi.io/documentation/3.x.x/guides/graphql.html#customise-the-graphql-schema 에서 
 Apply permissions on a query 부분을 살피자!
  
+
+ 0319 지금 axios 발송 안돼서 막힌 상태. 
  
  
  

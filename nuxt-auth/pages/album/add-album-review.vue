@@ -5,13 +5,14 @@
       <div>
         
     <v-container>
-    <form method="post" @submit.prevent="create">
+    <form method="post" @submit.prevent="submit">
       <v-layout row wrap>
         <v-flex
         xs12
         class="px-2 py-0">
           <v-text-field
             label="Url"
+            v-model="url"
           ></v-text-field>
          </v-flex>
         <v-flex
@@ -100,6 +101,7 @@
           name="review"
           label="리뷰"
           value=""
+          v-model="review"
           hint="작성해주세요."
         ></v-textarea>
         </v-flex>
@@ -115,12 +117,68 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
-  middleware: 'auth',
-  computed: {
-    ...mapGetters(['loggedInUser'])
+  data() {
+    return {
+      url: '',
+      album_id: '',
+      album_name: '',
+      artist_name: '',
+      genre: '',
+      released_date: '',
+      label: '',
+      agency: '',
+      rating: null,
+      review: ''
+    }
+  },
+  methods: {
+    create_album_info() {
+      this.$axios.post('graphql', {
+        query: `
+        mutation {
+          createAlbum(input: {
+            data: {
+              album_id: "`+this.album_id+`",
+              album_name: "`+this.album_name+`",
+              artist_id: "`+this.artist_id+`",
+              artist_name: "`+this.artist_name+`",
+              thumbnail: "`+this.thumbnail+`",
+              url: "`+this.url+`",
+              released_date: "`+this.released_date+`",,
+              genre: "`+this.genre+`",
+              label: "`+this.label+`",
+              agency: "`+this.agency+`",
+              created_user: "`+this.created_user+`",
+              created_date: "`+this.created_date+`"
+            }
+          }) {
+            album {
+              album_id
+              album_name
+              artist_id
+              artist_name
+              thumbnail
+              url
+              released_date
+              genre
+              label
+              agency
+              created_user
+              created_date
+            }
+          }
+        }
+        `
+      })
+    },
+    create_review() {
+
+    },
+    submit() {
+      this.create_album_info()
+    },
   }
 }
 </script>
