@@ -219,17 +219,51 @@ https://strapi.io/documentation/3.x.x/guides/graphql.html#customise-the-graphql-
 Apply permissions on a query 부분을 살피자!
  
 
+2. review 남기기
  0319 지금 axios 발송 안돼서 막힌 상태. 
+ mutation {
+  createReview(input: {
+    data: {
+      album_id: "test",
+      rating: "test",
+      review_title: "test",
+      review_text: "test",
+      created_date: "1992/04/16"
+      author: "test"
+    }
+  }) {
+    review {
+      album_id
+      rating
+      review_title
+      review_text
+      created_date
+      author
+    }
+  }
+ 이런 식으로 돌리면 된다. 다만 이렇게되면... 
+ 입력할 때 문제 
+ 1. User를 로그인된 사람으로 넣어주기. 
+ 2. 기타 relation 넣어줄 때 문제. 
  
- 
- 
+
+./api/post/config/schema.graphql.
+이 파일을 변경해서 graphql의 권한같은거 설정한다. 
+
+그런 것들이 구현에 대한 실제적인 걸림돌이다. 
+
+190320
+1700
+
+strapi의 설치, 
+[구현할 것.]
+1. relation type인 user를 넣어주기(attach author?)
+2. policy쪽. 삭제나 수정은 자기만 할 수 있도록 검증하기. 
+[그 과정에서 ]
+- strapi handler구조에 대한 이해를 얻을 수 있을 것으로 기대. 
 
 
-
-
-
-
-
+2-> policy는 알겠는데요 일단 여기서 handler쪽 보고 어떻게 하는지 한 번 보자. 
 
 
 
