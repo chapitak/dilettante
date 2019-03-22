@@ -263,7 +263,51 @@ strapi의 설치,
 - strapi handler구조에 대한 이해를 얻을 수 있을 것으로 기대. 
 
 
+
 2-> policy는 알겠는데요 일단 여기서 handler쪽 보고 어떻게 하는지 한 번 보자. 
+내가 어떻게 했더라? 
+ 기록해둔 바에 따르면 models -> Post.js에서 내가 이렇게 추가하였다. 
+    beforeCreate: async (model) => {
+    const now_date = new Date();
+    model.created_date = now_date;
+},
 
+Path — ./api/post/config/schema.graphql.
+에 들어가보기. 여기 plicy가 있다. 
 
+./api/*/config/schema.graphql 
+이라는 파일이 있다. 이건 만들어줘야 작동한다. 이게 없으면 Shadow CRUD가 작동한다. 
+
+고로, 일단 createReview를 손보려면 Review.create action에 맞춰서 행동해야한다. 그게 되면 graphQL도 될 것이다. 
+
+https://github.com/strapi/strapi/issues/624
+상기 링크가 큰 도움이 된다. setOwner를 연구해보자. 
+
+setOwner.js를 만들었다. 
+
+이걸 실행되게 만들어주자.
+정책이 안먹는다. 여기서 http request가 패널에는 없다. 
+
+정책을 넣어주니까 안된다. pending된다. 왜? 
+
+0322 1425 노선변경. 
+일단 그걸로 해보자 graphql말고 그냥... 
+
+1452 아주 깔끔하게 되었다. 
+계정입력은 그럼 된거고 정책으로 해결했고
+relation은? 서버에서 할 수 없다. 그냥 클라이언트에서 진행하자. 그럼 다 된거 아닌가? 그.. 권한 문제가 있긴 있다. 하지만 이는 삭제기능을 구현할 때의 일이다. 
+
+1515
+세상에.. 다 만들었다. 
+이제 조회화면을 만들어야 한다. 
+말이 되냐 이게? 
+주말에 구현 문제를 하긴 해야 한다. 
+
+생각해보자. 
+url을 따면 그걸로 로직을 만들어야 하는데 
+url대로 썸네일 다운로드 -> 해당 저장경로대로 호출 이렇게 하면 되겠다 
+asset - album이렇게. 
+근데 알잖아 그게 생각처럼 쉽게 안된다. 
+s3에 저장해야한다. 알지? 
+하지만, 그건 나중에 하자. 음 생각보다 금방 할 것 같다!
 

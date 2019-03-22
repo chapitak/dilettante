@@ -134,51 +134,56 @@ export default {
     }
   },
   methods: {
-    create_album_info() {
-      this.$axios.post('graphql', {
-        query: `
-        mutation {
-          createAlbum(input: {
-            data: {
-              album_id: "`+this.album_id+`",
-              album_name: "`+this.album_name+`",
-              artist_id: "`+this.artist_id+`",
-              artist_name: "`+this.artist_name+`",
-              thumbnail: "`+this.thumbnail+`",
-              url: "`+this.url+`",
-              released_date: "`+this.released_date+`",,
-              genre: "`+this.genre+`",
-              label: "`+this.label+`",
-              agency: "`+this.agency+`",
-              created_user: "`+this.created_user+`",
-              created_date: "`+this.created_date+`"
-            }
-          }) {
-            album {
-              album_id
-              album_name
-              artist_id
-              artist_name
-              thumbnail
-              url
-              released_date
-              genre
-              label
-              agency
-              created_user
-              created_date
-            }
-          }
-        }
-        `
-      })
-    },
-    create_review() {
-
-    },
     submit() {
       this.create_album_info()
+      this.create_review()
     },
+    create_review() {
+        this.$axios.post(`http://jeongkyo.kim:1337/reviews/`, {
+              album_id: this.album_id,
+              rating: this.rating,
+              review_title: null,
+              review_text: this.review,
+        })
+        .then(response => {
+            // Handle success.
+            console.log(
+            'Well done, your post has been successfully created: ',
+            response.data
+            );
+        })
+        .catch(error => {
+            // Handle error.
+            console.log('An error occurred:', error);
+        });
+    },
+    create_album_info() {
+        this.$axios.post(`http://jeongkyo.kim:1337/albums/`, {
+            album_id: this.album_id,
+            album_name: this.album_name,
+            artist_id: this.artist_id,
+            artist_name: this.artist_name,
+            thumbnail: this.thumbnail,
+            url: this.url,
+            released_date: this.released_date,
+            genre: this.genre,
+            label: this.label,
+            agency: this.agency,
+            created_user: this.created_user
+        })
+        .then(response => {
+            // Handle success.
+            console.log(
+            'Well done, your post has been successfully created: ',
+            response.data
+            );
+        })
+        .catch(error => {
+            // Handle error.
+            console.log('An error occurred:', error);
+        });
+    }
+
   }
 }
 </script>
