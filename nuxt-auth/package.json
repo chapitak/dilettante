@@ -16,8 +16,12 @@
     "@nuxtjs/auth": "^4.5.3",
     "@nuxtjs/axios": "^5.4.0",
     "@nuxtjs/vuetify": "^0.5.5",
+    "cheerio": "^1.0.0-rc.2",
+    "fs": "0.0.1-security",
     "material-design-icons-iconfont": "^4.0.5",
-    "nuxt": "^2.0.0"
+    "net": "^1.0.2",
+    "nuxt": "^2.0.0",
+    "tls": "0.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
