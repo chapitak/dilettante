@@ -1,3 +1,5 @@
+
+
 module.exports = {
   /*
    ** Headers of the page
@@ -36,6 +38,10 @@ module.exports = {
           exclude: /(node_modules)/
         });
       }
+      config.node = {
+
+        fs: "empty"
+    };
     }
   },
   modules: ["@nuxtjs/axios", "@nuxtjs/auth", "@nuxtjs/vuetify"],
@@ -55,7 +61,7 @@ module.exports = {
     }
   },
   node: {
-    console: true,
+    console: "empty",
     fs: "empty",
     net: "empty",
     tls: "empty"

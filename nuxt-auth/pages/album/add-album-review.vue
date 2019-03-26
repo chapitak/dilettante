@@ -78,11 +78,22 @@ export default {
   },
   watch: {
     url: function() {
-      request(url, (error, response, body) => {
-        console.log(response);
-      });
-      console.log("잘됌.");
+      $.ajax({
+      crossOrigin: true,
+      url: 'http://www.naver.com',
+      success: function(data) {
+        console.log(data)
+      }
+    });
     }
+  },
+  mounted() {
+    let jqueryScript = document.createElement('script')
+    jqueryScript.setAttribute('src', 'https://code.jquery.com/jquery-3.3.1.min.js')
+    document.head.appendChild(jqueryScript)
+    let jqueryCrossScript = document.createElement('script')
+    jqueryCrossScript.setAttribute('src', 'jquery.ajax-cross-origin.min.js')
+    document.head.appendChild(jqueryCrossScript)
   },
   methods: {
     submit() {

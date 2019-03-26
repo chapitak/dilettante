@@ -18,9 +18,12 @@
     "@nuxtjs/vuetify": "^0.5.5",
     "cheerio": "^1.0.0-rc.2",
     "fs": "0.0.1-security",
+    "jquery": "^3.3.1",
+    "jsonp": "^0.2.1",
     "material-design-icons-iconfont": "^4.0.5",
     "net": "^1.0.2",
     "nuxt": "^2.0.0",
+    "request": "^2.88.0",
     "tls": "0.0.1"
   },
   "devDependencies": {
@@ -28,6 +31,7 @@
     "eslint": "^4.19.1",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1",
-    "eslint-plugin-vue": "^4.0.0"
+    "eslint-plugin-vue": "^4.0.0",
+    "expose-loader": "^0.7.5"
   }
 }
