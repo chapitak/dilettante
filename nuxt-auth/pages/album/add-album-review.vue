@@ -78,22 +78,26 @@ export default {
   },
   watch: {
     url: function() {
-      $.ajax({
-      crossOrigin: true,
-      url: 'http://www.naver.com',
-      success: function(data) {
-        console.log(data)
-      }
-    });
+      this.$axios.get('https://asia-northeast1-orbital-builder-208407.cloudfunctions.net/function-1')
+      .then(response => {
+        // Handle success.
+        console.log(
+          "Well done, your post has been successfully created: ",
+          response.data
+        );
+        this.album_id = response.data.json_album_id
+        this.album_name = response.data.json_album_name
+        this.artist_id = response.data.json_artist_id
+        this.artist_name = response.data.json_artist_name
+        this.thumbnail = response.data.json_thumbnail
+        this.released_date = response.data.json_released_date
+        this.genre = response.data.json_genre
+        this.label = response.data.json_label
+        this.agency = response.data.json_agency
+      })
     }
   },
   mounted() {
-    let jqueryScript = document.createElement('script')
-    jqueryScript.setAttribute('src', 'https://code.jquery.com/jquery-3.3.1.min.js')
-    document.head.appendChild(jqueryScript)
-    let jqueryCrossScript = document.createElement('script')
-    jqueryCrossScript.setAttribute('src', 'jquery.ajax-cross-origin.min.js')
-    document.head.appendChild(jqueryCrossScript)
   },
   methods: {
     submit() {
