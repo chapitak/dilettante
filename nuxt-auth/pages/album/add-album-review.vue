@@ -78,11 +78,14 @@ export default {
   },
   watch: {
     url: function() {
-      this.$axios.get('https://asia-northeast1-orbital-builder-208407.cloudfunctions.net/function-1')
+      var url_string = this.url; //window.location.href
+      var external_url = new URL(url_string);
+      var query_string_albumId = external_url.searchParams.get("albumId");
+      
+      this.$axios.get('https://asia-northeast1-orbital-builder-208407.cloudfunctions.net/function-1?albumId=' + query_string_albumId)
       .then(response => {
         // Handle success.
         console.log(
-          "Well done, your post has been successfully created: ",
           response.data
         );
         this.album_id = response.data.json_album_id
