@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 const request = require("request");
 const cheerio = require("cheerio");
 
@@ -67,14 +68,22 @@ export default {
       url: "",
       album_id: "",
       album_name: "",
+      artist_id: "",
       artist_name: "",
+      thumbnail: "",
       genre: "",
       released_date: "",
       label: "",
       agency: "",
       rating: null,
-      review: ""
+      review: "",
+      album_exists: false,
+      review_exists: false,
+      review_update_target_id: ""
     };
+  },
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
   },
   watch: {
     url: function() {
@@ -98,14 +107,77 @@ export default {
         this.label = response.data.json_label
         this.agency = response.data.json_agency
       })
+      //여기 추후 기존 작성한 리뷰와  rating 가져오는 로직도 넣어야함. 
+      this.check_album_info()
+      this.check_review()
     }
   },
   mounted() {
   },
   methods: {
     submit() {
-      this.create_album_info();
-      this.create_review();
+      if(this.album_exists == false) {
+        this.create_album_info();
+      } else {
+        
+      }
+      if(this.review_exists == false) {
+        this.create_review();
+      } else {
+        this.update_review()
+      }
+    },
+    check_album_info() {
+      this.$axios({
+        url: 'http://54.180.32.24:1337/graphql',
+        method: 'post',
+        data: {
+            query: `
+            query {
+              albums(where: {album_id : "`+this.album_id+`"} ) {
+                _id
+                album_name
+              }
+            }
+            `
+        }
+        }).then((result) => { 
+          if(result.data.data.albums.length == 0){
+            this.album_exists = false
+            console.log("신규")
+          } else {
+            this.album_exists = true
+            console.log("있음")
+          }
+        }); 
+    },
+    check_review(){
+      this.$axios({
+        url: 'http://54.180.32.24:1337/graphql',
+        method: 'post',
+        data: {
+            query: `
+            query {
+              reviews(where: {album_id : "`+this.album_id+`", user: {_id: "`+this.loggedInUser._id+`"} } ) {
+                _id
+                rating
+                review_text
+              }
+            }
+            `
+        }
+        }).then((result) => { 
+          if(result.data.data.reviews.length == 0){
+            this.review_exists = false
+            console.log("신규")
+          } else {
+            this.review_exists = true
+            this.review_update_target_id = result.data.data.reviews._id
+            this.rating = result.data.data.reviews.rating
+            this.review_text = result.data.data.reviews.review_text
+            console.log("있음")
+          }
+        }); 
     },
     create_review() {
       this.$axios
@@ -126,6 +198,39 @@ export default {
           // Handle error.
           console.log("An error occurred:", error);
         });
+    },
+    update_review() {
+      this.$axios({
+        url: 'http://54.180.32.24:1337/graphql',
+        method: 'post',
+        data: {
+            query: `
+            mutation {
+              updateReview(input: {
+                where: {id: "`+this.review_update_target_id+`"},
+                data: {
+                  rating: "`+this.rating+`",
+                  review_title: "`+this.review_title+`",
+                  review_text: "`+this.review_text+`"      
+                }
+              }) {
+                review {
+                  rating
+                  review_title
+                  review_text
+                }
+              }
+            }
+            `
+        }
+        }).then((result) => { 
+          if(result.data.data.reviews.length == 0){
+            this.review_exists = false
+          } else {
+            this.review_exists = true 
+            this.review_update_target_id = result.data.data.reviews._id
+          }
+        }); 
     },
     create_album_info() {
       this.$axios

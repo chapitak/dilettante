@@ -1,12 +1,13 @@
 const request = require("request");
 const cheerio = require("cheerio");
 const cors = require('cors')({origin: true});
-var url_string = 'http://www.melon.com/album/detail.htm?albumId=4275'
+var url_string = 'http://www.melon.com/album/detail.htm?albumId='
 
       url_string = url_string + '2451'
       request(url_string, function (error, response, body) {
+      
       var $ = cheerio.load(body);
-      console.log($)
+      console.log(url_string)
 
       var album_Id = $('#btnLike').attr('data-album-no')
       var album_name = $('.song_name').not('strong').text().replace(/\t/gi,"").replace(/\n/gi,"").replace("앨범명","")
