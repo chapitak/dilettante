@@ -311,3 +311,18 @@ asset - album이렇게.
 s3에 저장해야한다. 알지? 
 하지만, 그건 나중에 하자. 음 생각보다 금방 할 것 같다!
 
+
+ࠀɄ 1:03 2019-03-28
+문제가 있다면. 
+Cannot read property 'replace' of undefined
+집에서 돌려보니까. 
+var artist_name = $('.artist').text().replace(/\t/gi,"").replace(/\n/gi,"")
+여기였던것같은데.
+일단 다시 링크 수정 후 해보자. 
+
+1. 있는지 확인하는 로직. 
+- graphql로 먼저 짜보기. 
+not null을 돌리면, 
+- 생각을 하자. 일단 client에서 id 구하기.
+ࠀɄ 5:08 2019-03-28
+이건 내 생각인데, async라서 안되는듯. 콜백넣어서 잘해보자. 
