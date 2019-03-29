@@ -13,19 +13,19 @@
     </v-card-title>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="reviews"
       :search="search"
       hide-actions
       :pagination.sync="pagination"
       class="elevation-1"
     >
       <template v-slot:items="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">{{ props.item.iron }}</td>
+        <td>{{ props.item.album_name }}</td>
+        <td class="text-xs-right"></td>
+        <td class="text-xs-right"></td>
+        <td class="text-xs-right"></td>
+        <td class="text-xs-right"></td>
+        <td class="text-xs-right"></td>
       </template>
     </v-data-table>
     <div class="text-xs-center pt-2">
@@ -55,7 +55,7 @@
           { text: 'agency', value: 'agency' },
           { text: 'created', value: 'created_date' }
         ],
-        desserts: []
+        reviews: []
       }
     },
     computed: {
@@ -74,16 +74,32 @@
         data: {
             query: `
             query {
-              reviews(where: {album_id : "`+album_id+`", user: {_id: "`+this.loggedInUser._id+`"} } ) {
-                _id
-                rating
-                review_text
-              }
-            }
+                reviews(where: {user: {_id: "5c7d0b79218eb714ff8cf308"} } ) {
+                    _id
+                    rating
+                    review_title
+                    review_text
+                    created_date
+                    album {
+                    album_id
+                    album_name
+                    artist_id
+                    artist_name
+                    genre
+                    released_date
+                    label
+                    agency
+                    created_date
+                    }
+                }
+                }
+
             `
         }
-        }).then((result) => {
-        });         
+        }).then((result) => { 
+            this.reviews = result.data.data
+        })
+        
     }
   }
 </script>
