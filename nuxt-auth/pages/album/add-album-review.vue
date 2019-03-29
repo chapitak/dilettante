@@ -44,7 +44,7 @@
                 ></v-rating>
               </v-flex>
               <v-flex class="px-2 py-0" xs12>
-                <v-textarea outline name="review" label="리뷰" value v-model="review" hint="작성해주세요."></v-textarea>
+                <v-textarea outline name="review" label="리뷰" value v-model="review_text" hint="작성해주세요."></v-textarea>
               </v-flex>
             </v-layout>
             <div class="control">
@@ -76,10 +76,12 @@ export default {
       label: "",
       agency: "",
       rating: null,
-      review: "",
+      review_title: "",
+      review_text: "",
       album_exists: false,
       review_exists: false,
-      review_update_target_id: ""
+      review_update_target_id: "",
+      album_target_id: ""
     };
   },
   computed: {
@@ -106,35 +108,37 @@ export default {
         this.genre = response.data.json_genre
         this.label = response.data.json_label
         this.agency = response.data.json_agency
-      })
-      //여기 추후 기존 작성한 리뷰와  rating 가져오는 로직도 넣어야함. 
-      this.check_album_info()
-      this.check_review()
+
+        this.check_album_info(this.album_id)
+        this.check_review(this.album_id)
+      })      
     }
   },
   mounted() {
   },
   methods: {
     submit() {
+      //총 3가지 플로우가 있다. 1. ablum과 review모두 신규, 2. album은 있고 review신규, 3. album은 있고 review는 업데이트. 
       if(this.album_exists == false) {
-        this.create_album_info();
+        this.create_album_info(); //처음 들어가는 앨범은 여기서 생성. 이 안에서 create review까지 해결. 1번이다. 
+        return
       } else {
         
       }
       if(this.review_exists == false) {
-        this.create_review();
+        this.create_review(); //2번이다.
       } else {
-        this.update_review()
+        this.update_review() //3번이다.
       }
     },
-    check_album_info() {
+    check_album_info(album_id) {
       this.$axios({
         url: 'http://54.180.32.24:1337/graphql',
         method: 'post',
         data: {
             query: `
             query {
-              albums(where: {album_id : "`+this.album_id+`"} ) {
+              albums(where: {album_id : "`+album_id+`"} ) {
                 _id
                 album_name
               }
@@ -145,20 +149,24 @@ export default {
           if(result.data.data.albums.length == 0){
             this.album_exists = false
             console.log("신규")
+            console.log(result.data.data)
+            this.album_exists = false
+            this.album_target_id = ""
           } else {
             this.album_exists = true
+            this.album_target_id = result.data.data.albums[0]._id
             console.log("있음")
           }
         }); 
     },
-    check_review(){
+    check_review(album_id){
       this.$axios({
         url: 'http://54.180.32.24:1337/graphql',
         method: 'post',
         data: {
             query: `
             query {
-              reviews(where: {album_id : "`+this.album_id+`", user: {_id: "`+this.loggedInUser._id+`"} } ) {
+              reviews(where: {album_id : "`+album_id+`", user: {_id: "`+this.loggedInUser._id+`"} } ) {
                 _id
                 rating
                 review_text
@@ -170,11 +178,16 @@ export default {
           if(result.data.data.reviews.length == 0){
             this.review_exists = false
             console.log("신규")
+            console.log(result.data.data)
+            this.review_exists = false
+            this.review_update_target_id = ""
+            this.rating = ""
+            this.review_text = ""
           } else {
             this.review_exists = true
-            this.review_update_target_id = result.data.data.reviews._id
-            this.rating = result.data.data.reviews.rating
-            this.review_text = result.data.data.reviews.review_text
+            this.review_update_target_id = result.data.data.reviews[0]._id
+            this.rating = Number(result.data.data.reviews[0].rating)
+            this.review_text = result.data.data.reviews[0].review_text
             console.log("있음")
           }
         }); 
@@ -185,7 +198,8 @@ export default {
           album_id: this.album_id,
           rating: this.rating,
           review_title: null,
-          review_text: this.review
+          review_text: this.review_text,
+          album: this.album_target_id
         })
         .then(response => {
           // Handle success.
@@ -211,7 +225,8 @@ export default {
                 data: {
                   rating: "`+this.rating+`",
                   review_title: "`+this.review_title+`",
-                  review_text: "`+this.review_text+`"      
+                  review_text: "`+this.review_text+`",      
+                  album: "`+this.review_text+`"      
                 }
               }) {
                 review {
@@ -224,12 +239,6 @@ export default {
             `
         }
         }).then((result) => { 
-          if(result.data.data.reviews.length == 0){
-            this.review_exists = false
-          } else {
-            this.review_exists = true 
-            this.review_update_target_id = result.data.data.reviews._id
-          }
         }); 
     },
     create_album_info() {
@@ -253,6 +262,8 @@ export default {
             "Well done, your post has been successfully created: ",
             response.data
           );
+          this.album_target_id = response.data.id
+          this.create_review() 
         })
         .catch(error => {
           // Handle error.
