@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card-title>
-      Nutrition
+      View All
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -11,21 +11,24 @@
         hide-details
       ></v-text-field>
     </v-card-title>
-    <v-data-table
+    <v-data-table 
       :headers="headers"
       :items="reviews"
       :search="search"
       hide-actions
       :pagination.sync="pagination"
-      class="elevation-1"
+      class="elevation-1 text-xs-center"
     >
       <template v-slot:items="props">
-        <td>{{ props.item.album_name }}</td>
-        <td class="text-xs-right"></td>
-        <td class="text-xs-right"></td>
-        <td class="text-xs-right"></td>
-        <td class="text-xs-right"></td>
-        <td class="text-xs-right"></td>
+        <td class="text-xs-center">{{ props.index + 1 }}</td>
+        <td class="text-xs-center">{{ props.item.rating }}</td>
+        <td class="text-xs-center">{{ props.item.album.album_name }}</td>
+        <td class="text-xs-center">{{ props.item.album.artist_name }}</td>
+        <td class="text-xs-center">{{ props.item.album.genre }}</td>
+        <td class="text-xs-center">{{ props.item.album.released_date.substring(0,10) }}</td>
+        <!--<td class="text-xs-center">{{ props.item.album.label }}</td>
+        <td class="text-xs-center">{{ props.item.album.agency }}</td>-->
+        <td class="text-xs-center" v-if="props.item.created_date !=null" >{{ props.item.created_date.substring(0,10) }}</td>
       </template>
     </v-data-table>
     <div class="text-xs-center pt-2">
@@ -41,19 +44,22 @@
         pagination: {},
         selected: [],
         headers: [
+          { text: '순번', value: 'index', align: 'center', width: '1%' },
           {
             text: '판점',
             //align: 'left',
             sortable: true,
-            value: 'rating'
+            value: 'rating',
+            align: 'center',
+            width: '1%'
           },
-          { text: 'title', value: 'album_name' },
-          { text: 'artist', value: 'artist_name' },
-          { text: 'genre', value: 'genre' },
-          { text: 'released', value: 'released_date' },
-          { text: 'label', value: 'label' },
-          { text: 'agency', value: 'agency' },
-          { text: 'created', value: 'created_date' }
+          { text: 'title', value: 'album.album_name', align: 'center' },
+          { text: 'artist', value: 'album.artist_name' , align: 'center' },
+          { text: 'genre', value: 'album.genre' , align: 'center' },
+          { text: 'released', value: 'album.released_date',sortable: true, align: 'center'  },
+          /*{ text: 'label', value: 'label', align: 'center' },
+          { text: 'agency', value: 'agency', align: 'center' },*/
+          { text: 'created', value: 'created_date', align: 'center' }
         ],
         reviews: []
       }
@@ -97,7 +103,9 @@
             `
         }
         }).then((result) => { 
-            this.reviews = result.data.data
+            this.reviews = result.data.data.reviews
+            this.totalReviews
+            console.log(this.reviews)
         })
         
     }
