@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <h1 class="title">review component</h1>
+      
         <br>
         <template>
         <v-layout>
@@ -14,16 +14,17 @@
 
               <v-card-title primary-title>
                 <div>
+                  <div>{{artist_name}}</div>
                   <h3 class="headline mb-0">{{album_name}}</h3>
-                  <span>☆{{rating}}</span><span style="float:right">{{released_date}}</span>
+                  <span>{{genre}} ☆{{rating}} </span><span style="float:right">{{released_date}}</span>
                   <br>
-                  <div> {{ review_text }} </div>
+                  <div class="pt-2"> {{ review_text }} </div>
                 </div>
               </v-card-title>
 
               <v-card-actions>
-                <v-btn flat color="orange">Share</v-btn>
-                <v-btn flat color="orange">Explore</v-btn>
+                <v-btn flat color="orange">Kiss</v-btn>
+                <v-btn flat color="orange">Comment</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -37,10 +38,12 @@ export default {
   name: 'ViewSingleReview',
   data() {
     return {
-        album_name: "Kangaroo Valley Safari",
-        review_text: 'Lorem ipsum dolor sit amet, brute iriure accusata ne mea. Eos suavitate referrentur ad, te duo agam libris qualisque, utroque quaestio accommodare no qui. Et percipit laboramus usu, no invidunt verterem nominati mel. Dolorem ancillae an mei, ut putant invenire splendide mel, ea nec propriae adipisci. Ignota salutandi accusamus in sed, et per malis fuisset, qui id ludus appareat.',
+        artist_name: "언니네 이발관",
+        album_name: "후일담",
+        review_text: '5집보다 좋은 앨범이다. 동의하지 않는 사람과 논쟁하지 않겠다. 그는 논쟁할 가치가 없는 사람이기 때문이다.',
         released_date: "2001-01-23",
-        rating: "4.0"
+        rating: "4.0",
+        genre: "Rock"
     }
   }
   //,  props: ['message']

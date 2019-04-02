@@ -3,6 +3,7 @@
     <div class="container">
       <h1 class="title">review thread</h1>
       <ViewSingleReview/>
+      <ViewSingleReview/>
     </div>
   </section>
 </template>

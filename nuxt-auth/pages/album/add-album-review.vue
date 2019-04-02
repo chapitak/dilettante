@@ -54,6 +54,25 @@
         </v-container>
       </div>
     </div>
+    <v-snackbar
+      v-model="snackbar"
+      :bottom="y === 'bottom'"
+      :left="x === 'left'"
+      :multi-line="mode === 'multi-line'"
+      :right="x === 'right'"
+      :timeout="timeout"
+      :top="y === 'top'"
+      :vertical="mode === 'vertical'"
+    >
+      {{ text }}
+      <v-btn
+        color="pink"
+        flat
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </section>
 </template>
 
@@ -81,7 +100,15 @@ export default {
       album_exists: false,
       review_exists: false,
       review_update_target_id: "",
-      album_target_id: ""
+      album_target_id: "",
+
+      //이하 스낵바옵션
+      snackbar: false,
+      y: 'top',
+      x: null,
+      mode: '',
+      timeout: 6000,
+      text: '저장이 완료되었습니다.'
     };
   },
   computed: {
@@ -121,6 +148,7 @@ export default {
       //총 3가지 플로우가 있다. 1. ablum과 review모두 신규, 2. album은 있고 review신규, 3. album은 있고 review는 업데이트. 
       if(this.album_exists == false) {
         this.create_album_info(); //처음 들어가는 앨범은 여기서 생성. 이 안에서 create review까지 해결. 1번이다. 
+        this.snackbar=true
         return
       } else {
         
@@ -130,6 +158,7 @@ export default {
       } else {
         this.update_review() //3번이다.
       }
+      this.snackbar=true
     },
     check_album_info(album_id) {
       this.$axios({
@@ -207,6 +236,7 @@ export default {
             "Well done, your post has been successfully created: ",
             response.data
           );
+            this.review_exists = true
         })
         .catch(error => {
           // Handle error.

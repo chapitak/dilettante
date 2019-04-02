@@ -41,7 +41,10 @@
     data () {
       return {
         search: '',
-        pagination: {},
+        pagination: {
+          rowsPerPage: 20,
+          totalItems: ''
+        },
         selected: [],
         headers: [
           { text: '순번', value: 'index', align: 'center', width: '1%' },
@@ -71,7 +74,7 @@
         ) return 0
 
         return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
-      }
+      } 
     }, 
     mounted () {
         this.$axios({
@@ -104,7 +107,7 @@
         }
         }).then((result) => { 
             this.reviews = result.data.data.reviews
-            this.totalReviews
+            this.pagination.totalItems = result.data.data.reviews.length
             console.log(this.reviews)
         })
         
