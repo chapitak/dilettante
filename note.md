@@ -386,4 +386,70 @@ review 입력할 때 입력되게 하자.
   s3에서 설정해야겠다... 
   
   
+ 
+  var thumbnail_url = result.thumbnail
+  var album_id = result.album_id
+  var theUrl = 'https://us-central1-orbital-builder-208407.cloudfunctions.net/getAlbumThumb?thumbnail_url=' + thumbnail_url + '&album_id=' + album_id
+
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function() { 
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+          callback(xmlHttp.responseText);
+  }
+  xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+  xmlHttp.send(null);
+
+
+    https://us-central1-orbital-builder-208407.cloudfunctions.net/getAlbumThumb?thumbnail_url=https://cdnimg.melon.co.kr/cm/album/images/000/04/275/4275_500.jpg?1566930fa95cf4691aaf20d3becf58df/melon/resize/282/quality/80/optimize&album_id=4275
+
+    이게 url이었다. 
+
+    model.created_date = now_date;
+    result.album_id
+    result.thumbnail
+
+    
   
+  할 일: cloud function python 만들기. 저장-로드. aws cli를 통해서. 
+  로드해오기까지. 
+  
+  
+  aws s3api create-bucket --bucket dilettante --region ap-northeast-2 --create-bucket-configuration LocationConstraint=ap-northeast-2
+  
+  https://stackoverflow.com/questions/15050057/download-a-file-directly-to-s3
+  이거 참조하면 될듯. 
+이제 해야할 것은? thumb  url을 보내면 그걸 받아서 저장하게 만들어야 한다. 
+  
+  https://us-central1-orbital-builder-208407.cloudfunctions.net/getAlbumThumb?thumbnail_url=https://cdnimg.melon.co.kr/cm/album/images/000/04/275/4275_500.jpg?1566930fa95cf4691aaf20d3becf58df/melon/resize/282/quality/80/optimize&album_id=4275
+  
+  으 토할거같아
+  완성했다 ㅠ 
+  너무 행복하다.. 
+  내가만든 코드가 다시 cloud function에서 돌아가고 있다 
+  물론 DB는 아니지만ㅋㅋㅋㅋ
+  
+  
+  ࠀɄ 2:33 2019-04-02
+  beforecreate에 넣을까? 그래도 되고... 보안상 위험하니까 그렇게 하자. 
+  parameter 2개 가져오기. 
+  1. 
+
+  190402
+  afterCraete에 넣었다. 잘 저장된다. 불러오는 경로는 
+
+  http://s3.ap-northeast-2.amazonaws.com/dilettante/42751.jpg
+  맨 뒤에 albumid를 넣으면 그 사진이 있다면! 불러와진다. 
+  하.. 이것도 참 오래걸렸다. 
+
+  컴포넌트로 만들어서 재사용해야될 것 같다. 
+
+  1. 카드 컴포넌트
+
+  2. 스레드 컴포넌트
+
+  3. 페이지는 ㄱ. 앨범에 붙는 스레드 ㄴ. 유저에 붙는 스레드. 
+어. 인스타그램처럼 길쭉한 카드로 만들자. 인스타그램은 정사각형이지? 
+--------------------------------------------------------------------------------
+대충 위의 점선 정도의 길이. 몇 픽셀일까? 
+
+와 vuetify의 parallax써도 예쁘겠다.. 그런데 마땅한 방법은 떠오르지 않음. 
