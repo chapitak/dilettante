@@ -453,3 +453,23 @@ review 입력할 때 입력되게 하자.
 대충 위의 점선 정도의 길이. 몇 픽셀일까? 
 
 와 vuetify의 parallax써도 예쁘겠다.. 그런데 마땅한 방법은 떠오르지 않음. 
+그냥 이걸 쓸까? 쓰자. 여기선 이걸로 쓰고, 다른 페이지에서 전체 화면을 띄우게 하자. 
+
+
+  ࠀ| 8:03 2019-04-03
+material icon 모음
+audiotrack (음표) 영문표현은? like, love, sugar honey hype! 
+music_note(음표)
+comment
+
+  보려면 
+  
+  배포는 netlify로 하기. 
+  strapi는 ssl 어케하지 
+  
+  1. 일단 정보 불러오기. review 5개만 불러오자. 
+  
+ 불러올 정보가 없을 때 <slot>이라는걸 사용하면 된다고 한다. prop관련 https://kr.vuejs.org/v2/guide/components.html#Props%EB%A1%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EB%8B%AC%ED%95%98%EA%B8%B0 여기 관련 정보 있는 듯. 
+ 
+ oh......알겠따. 지금까지 헛짓거리하고 있었다. 
+ id만 넘기자. 나머지는 개별 ajax로딩으로 간다.
