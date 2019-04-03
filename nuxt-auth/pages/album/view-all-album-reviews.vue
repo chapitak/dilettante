@@ -20,15 +20,17 @@
       class="elevation-1 text-xs-center"
     >
       <template v-slot:items="props">
-        <td class="text-xs-center">{{ props.index + 1 }}</td>
-        <td class="text-xs-center">{{ props.item.rating }}</td>
-        <td class="text-xs-center">{{ props.item.album.album_name }}</td>
-        <td class="text-xs-center">{{ props.item.album.artist_name }}</td>
-        <td class="text-xs-center">{{ props.item.album.genre }}</td>
-        <td class="text-xs-center">{{ props.item.album.released_date.substring(0,10) }}</td>
-        <!--<td class="text-xs-center">{{ props.item.album.label }}</td>
-        <td class="text-xs-center">{{ props.item.album.agency }}</td>-->
-        <td class="text-xs-center" v-if="props.item.created_date !=null" >{{ props.item.created_date.substring(0,10) }}</td>
+        <tr> <!-- @click="move()"차후에 이동하도록 하자. https://codepen.io/nsiggel/pen/KRdGgE-->
+          <td class="text-xs-center">{{ props.index + 1 }}</td>
+          <td class="text-xs-center">{{ props.item.rating }}</td>
+          <td class="text-xs-center">{{ props.item.album.album_name }}</td>
+          <td class="text-xs-center">{{ props.item.album.artist_name }}</td>
+          <td class="text-xs-center">{{ props.item.album.genre }}</td>
+          <td class="text-xs-center">{{ props.item.album.released_date.substring(0,10) }}</td>
+          <!--<td class="text-xs-center">{{ props.item.album.label }}</td>
+          <td class="text-xs-center">{{ props.item.album.agency }}</td>-->
+          <td class="text-xs-center" v-if="props.item.created_date !=null" >{{ props.item.created_date.substring(0,10) }}</td>
+        </tr>
       </template>
     </v-data-table>
     <div class="text-xs-center pt-2">
@@ -37,6 +39,7 @@
   </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex' 
   export default {
     data () {
       return {
@@ -76,6 +79,9 @@
         return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
       } 
     }, 
+    computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+    },
     mounted () {
         this.$axios({
         url: 'http://54.180.32.24:1337/graphql',
@@ -83,7 +89,7 @@
         data: {
             query: `
             query {
-                reviews(where: {user: {_id: "5c7d0b79218eb714ff8cf308"} } ) {
+                reviews(where: {user: {_id: "`+this.loggedInUser._id+`"} } ) {
                     _id
                     rating
                     review_title

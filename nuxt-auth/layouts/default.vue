@@ -106,7 +106,7 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      { icon: 'album', text: 'Music', value: 'album' }
+      { icon: 'album', text: 'Music', value: '/album' }
       /*{ icon: 'touch_app', text: 'Reminders' },
       { divider: true },
       { heading: 'Labels' },
@@ -141,7 +141,7 @@ export default {
         this.logout()
       }
       else {
-        this.$router.push(target)
+        this.$router.replace(target)
       }
     }
   }
