@@ -33,7 +33,7 @@
         </tr>
       </template>
     </v-data-table>
-    <div class="text-xs-center pt-2">
+    <div class="text-xs-center pt-2" v-if="pages !== undefined">
       <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
     </div>
   </div>
@@ -70,6 +70,14 @@
         reviews: []
       }
     },
+    methods: {
+      customFilter(items, search, filter) {
+
+          search = search.toString().toLowerCase()
+          return items.filter(row => filter(row["type"], search));
+
+      }
+    },
     computed: {
       pages () {
         if (this.pagination.rowsPerPage == null ||
@@ -77,10 +85,8 @@
         ) return 0
 
         return Math.ceil(this.pagination.totalItems / this.pagination.rowsPerPage)
-      } 
-    }, 
-    computed: {
-    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+      }, 
+      ...mapGetters(['isAuthenticated', 'loggedInUser'])
     },
     mounted () {
         this.$axios({
