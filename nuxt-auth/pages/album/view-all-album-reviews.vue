@@ -1,23 +1,32 @@
 <template>
   <div>
-    <v-card-title>
-      View All
+    <v-layout row wrap>
       <v-spacer></v-spacer>
+      <v-flex xs2>
+      <v-select
+          v-model="search_filter_type"
+          :items="filter_type"
+          label="filter"
+      ></v-select>
+      </v-flex>
+      <v-flex xs6>
       <v-text-field
         v-model="search"
         append-icon="search"
         label="Search"
-        single-line
         hide-details
+        @input="filterSearch"
       ></v-text-field>
-    </v-card-title>
+      </v-flex>
+    </v-layout>
     <v-data-table 
       :headers="headers"
       :items="reviews"
-      :search="search"
+      :search="filters"
       hide-actions
       :pagination.sync="pagination"
       class="elevation-1 text-xs-center"
+      :custom-filter="customFilter"
     >
       <template v-slot:items="props">
         <tr> <!-- @click="move()"차후에 이동하도록 하자. https://codepen.io/nsiggel/pen/KRdGgE-->
@@ -44,6 +53,18 @@
     data () {
       return {
         search: '',
+        search_filter_type: 'title',
+        filter_type: [
+          'rating',
+          'title',
+          'artist',
+          'genre',
+          'released',
+          'created'
+        ],
+        filters: {
+        search: ''
+        },
         pagination: {
           rowsPerPage: 20,
           totalItems: ''
@@ -71,12 +92,70 @@
       }
     },
     methods: {
-      customFilter(items, search, filter) {
+      customFilter(items, filters, filter, headers) {
+        // Init the filter class.
+        const cf = new this.$MultiFilters(items, filters, filter, headers);
 
-          search = search.toString().toLowerCase()
-          return items.filter(row => filter(row["type"], search));
+        if(this.search_filter_type === 'rating') {
+          cf.registerFilter('search', function (searchWord, items) {
+            if (searchWord.trim() === '') return items;
+              //
+                return items.filter(item => {
+                  return item.rating.match(searchWord);
+                }, searchWord);
+              //}
 
+          });
+        }
+
+        if(this.search_filter_type === 'title') {
+          cf.registerFilter('search', function (searchWord, items) {
+            if (searchWord.trim() === '') return items;
+              //
+                return items.filter(item => {
+                  return item.album.album_name.includes(searchWord);
+                }, searchWord);
+              //}
+
+          });
+        }
+
+        if(this.search_filter_type === 'artist') {
+          cf.registerFilter('search', function (searchWord, items) {
+            if (searchWord.trim() === '') return items;
+              //
+                return items.filter(item => {
+                  return item.album.artist_name.includes(searchWord);
+                }, searchWord);
+              //}
+
+          });
+        }
+
+
+        /*cf.registerFilter('added_by', function (added_by, items) {
+          if (added_by.trim() === '') return items;
+          return items.filter(item => {
+            return item.added_by.toLowerCase() === added_by.toLowerCase();
+          }, added_by);
+        });*/
+        // Its time to run all created filters.
+        // Will be executed in the order thay were defined.
+        return cf.runFilters();
+      },
+      /**
+       * Handler when user input something at the "Filter" text field.
+       */
+      filterSearch(val) {
+        this.filters = this.$MultiFilters.updateFilters(this.filters, {search: val});
+      },
+      /**
+       * Handler when user  select some author at the "Author" select.
+       */
+      filterAuthor(val) {
+        this.filters = this.$MultiFilters.updateFilters(this.filters, {added_by: val});
       }
+    
     },
     computed: {
       pages () {
