@@ -69,5 +69,8 @@ module.exports = {
   vuetify: {
     // Vuetify options
     //  theme: { }
-  }
+  },
+  plugins: [
+    { src: '~plugins/MultiFilters.js', ssr: false }
+  ]
 };

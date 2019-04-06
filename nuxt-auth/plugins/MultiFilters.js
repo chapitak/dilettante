@@ -1,3 +1,6 @@
+import Vue from 'vue'
+Vue.use(MultiFilters)
+
 /**
  * Enabled v-data-table to have moire than one filter.
  */

@@ -6,6 +6,7 @@
         <v-layout>
           <v-flex xs12 sm6 offset-sm3>
             <v-card>
+              <div class="pa-2"> <span>&nbsp;&nbsp;&nbsp;<b>{{reviewer_name}}</b></span></div>
               <v-parallax :src="parallax_src" height="120"></v-parallax>
               <!--<v-img
                 src="http://s3.ap-northeast-2.amazonaws.com/dilettante/4275.jpg"
@@ -13,7 +14,7 @@
               ></v-img>-->
 
               <v-card-title primary-title>
-                <div>
+                <div style="width:100%">
                   <div>{{artist_name}}</div>
                   <h3 class="headline mb-0">{{album_name}}</h3>
                   <span>{{genre}} ☆{{rating}} </span><span style="float:right">{{released_date.substring(0,10)}}</span>
@@ -45,7 +46,8 @@ export default {
         released_date: "2001-01-23",
         rating: "4.0",
         genre: "Rock",
-        parallax_src: ""
+        parallax_src: "",
+        reviewer_name: ""
 
     }
   },
@@ -63,7 +65,7 @@ export default {
         this.released_date = response.data.album.released_date
         this.genre = response.data.album.genre
         this.rating = response.data.rating
-
+        this.reviewer_name = response.data.user.username
         this.parallax_src = "http://s3.ap-northeast-2.amazonaws.com/dilettante/" + response.data.album.album_id + ".jpg"
     })
   },
