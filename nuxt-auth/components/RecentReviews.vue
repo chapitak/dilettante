@@ -7,6 +7,7 @@
         
         <ViewSingleReview :reviewId="review._id" />
       </div>
+      <v-btn @click="appendReviews()">더 보기</v-btn>
     </div>
   </section>
 </template>
@@ -21,11 +22,13 @@ export default {
   },
   data() {
     return {
-      reviews: []
+      reviews: [],
+      page: 1,
+      paging: 10
     }
   },
   mounted() {
-    this.$axios.get('http://jeongkyo.kim:1337/reviews?_limit=10')
+    this.$axios.get('http://jeongkyo.kim:1337/reviews?_sort=createdAt:desc&_limit=' + this.paging)
       .then(response => {
         // Handle success.
         console.log(
@@ -35,6 +38,17 @@ export default {
     })
   }, 
   methods: {
+    appendReviews() {
+      this.$axios.get('http://jeongkyo.kim:1337/reviews?_sort=createdAt:desc&_limit=' + this.paging + '&_start=' + this.page*this.paging)
+        .then(response => {
+          // Handle success.
+          console.log(
+            response.data
+          );
+          this.reviews = this.reviews.concat(response.data)
+      })
+
+    }
   }
 }
 </script>

@@ -6,6 +6,7 @@
         <ViewSingleReview :reviewId="review._id" />
       </div>
     </div>
+    
   </section>
 </template>
 

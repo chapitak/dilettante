@@ -487,3 +487,43 @@ comment
  찾았다. 이대로 하자 이거가 대박인듯
  생각을 천천히 하는게 남는거당... 
  https://github.com/frontid/vuetify-data-table-multi-filter
+
+ 0408
+
+ 앞으로 만들 것. 
+ - 메인화면 정리
+i) 레이아웃
+- 무한 스크롤 어떻게 구현하나? 
+가설 1. push로 array에 추가하면 쭉 늘어나줄 것이다. 
+- 이거 안되는 것 같다. 컴포넌트에서 id받아서 해줄 때 undefined를 받는다. 
+방법 2. 무한스크롤 보고 따라서 하자. 
+- push로 하면 된다. 근데 array 가 unpack되어서 들어가야 하는데 한 번에 들어감 어떻게하나? unpack하면 좋은데 안된다. 
+구현했다. 다음. 
+
+
+ii) 리뷰올린 사람 개수 top 5명 뽑아서 보여줘야겠다. 
+- 이거야 말로 graphql로 만들어야 함. users를 가져오면 안됨. 
+와 쿼리 만들었다. graphql
+query {
+  reviewsConnection {
+    groupBy {
+      user {
+        key
+        connection{
+          aggregate{
+            count
+          }
+        }
+      }
+    }
+  }
+}
+이론적으로 user대로 reviews를 묶는다. 그러면 원하는 결과가 나오는데 sort가 안됨. 
+- 
+iii) 싱글앨범뷰 정리
+
+
+ - google 로그인 기능
+ - 좋아요 기능
+ - 코멘트 기능
+ 
