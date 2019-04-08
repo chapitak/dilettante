@@ -42,7 +42,8 @@ module.exports = {
 
         fs: "empty"
     };
-    }
+    },
+    vendor: ['MultiFilters']
   },
   modules: ["@nuxtjs/axios", "@nuxtjs/auth", "@nuxtjs/vuetify"],
   axios: {
@@ -71,6 +72,6 @@ module.exports = {
     //  theme: { }
   },
   plugins: [
-    { src: '~plugins/MultiFilters.js', ssr: false }
+    { src: '~plugins/MultiFilters.js'}
   ]
 };

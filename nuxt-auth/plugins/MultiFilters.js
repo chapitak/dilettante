@@ -1,5 +1,5 @@
 import Vue from 'vue'
-Vue.use(MultiFilters)
+//import MultiFiltersPlugin from 'MultiFilters' // <-- THIS
 
 /**
  * Enabled v-data-table to have moire than one filter.
@@ -65,5 +65,9 @@ class MultiFilters {
       Vue.prototype.$MultiFilters = MultiFilters;
     }
   };
+
   
   export default MultiFiltersPlugin;
+
+  
+  Vue.use(MultiFiltersPlugin)

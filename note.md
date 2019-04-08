@@ -473,3 +473,17 @@ comment
  
  oh......알겠따. 지금까지 헛짓거리하고 있었다. 
  id만 넘기자. 나머지는 개별 ajax로딩으로 간다.
+
+ 190404
+ 그거. 검색창 만들자. 
+ 1105검색창로직이해
+
+ 1722
+ 전부검색만 된다. 
+ 수정해보려니까 안됐다. 
+ filter property가 없단다. 
+ example을 찾아야한다. 
+ https://frontid.github.io/vuetify-data-table-multi-filter/
+ 찾았다. 이대로 하자 이거가 대박인듯
+ 생각을 천천히 하는게 남는거당... 
+ https://github.com/frontid/vuetify-data-table-multi-filter
