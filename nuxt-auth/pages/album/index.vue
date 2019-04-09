@@ -1,9 +1,12 @@
 <template>
   <section class="section">
-    <div class="container">
+    <div class="container text-xs-center" >
       <h1 class="title">Music Index</h1>
-      <v-btn @click="move('/album/view-all-album-reviews')">전체보기</v-btn>
-      <v-btn @click="move('/album/add-album-review')">추가</v-btn>      
+      <v-btn @click="move('/album/view-all-album-reviews')">내 목록 전체보기</v-btn>
+      <v-btn @click="move('/album/add-album-review')">쓰기</v-btn>      
+    </div>
+    <div>
+      <UserReviewsCount/>
     </div>
     <div>
       <RecentReviews/>
@@ -13,6 +16,7 @@
 
 <script>
 import RecentReviews from '~/components/RecentReviews'
+import UserReviewsCount from '~/components/UserReviewsCount'
 
 export default {
   data() {
@@ -22,6 +26,7 @@ export default {
   },
   components: {
     RecentReviews,
+    UserReviewsCount
   },
   mounted() {
   }, 

@@ -1,5 +1,5 @@
 <template>
-    <div class="ViewSingleReview.vue"  v-if="reviewId">
+    <div class="ViewSingleReview"  v-if="reviewId">
       
         <br>
         <template>

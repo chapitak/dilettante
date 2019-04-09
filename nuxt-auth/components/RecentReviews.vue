@@ -7,7 +7,8 @@
         
         <ViewSingleReview :reviewId="review._id" />
       </div>
-      <v-btn @click="appendReviews()">더 보기</v-btn>
+      <br>
+      <div class="text-xs-center"><v-btn large @click="appendReviews()">더 보기</v-btn></div>
     </div>
   </section>
 </template>
