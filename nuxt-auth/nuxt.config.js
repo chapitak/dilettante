@@ -1,4 +1,4 @@
-
+import TerserPlugin from 'terser-webpack-plugin'
 
 module.exports = {
   /*
@@ -25,6 +25,7 @@ module.exports = {
   /*
    ** Build configuration
    */
+  
   build: {
     /*
      ** Run ESLint on save
@@ -42,6 +43,7 @@ module.exports = {
 
         fs: "empty"
     };
+    config.plugins = config.plugins.filter((plugin) => plugin.constructor.name !== 'UglifyJsPlugin')
     },
     vendor: ['MultiFilters']
   },

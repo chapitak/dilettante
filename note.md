@@ -537,6 +537,68 @@ aggregate하되 랭크를 정해서 돌리는 방법이 없나?
 
 iii) 싱글앨범뷰 정리(전체보기에서 클릭하면 넘어가는 것)
 
+
+ࠀ| 8:22 2019-04-10
+일단 띄워놓고
+
+배포 방법은 고민해보자. 
+ 
+ https://medium.com/codeartisan/how-to-run-nuxt-js-on-digitalocean-159fc558d2ab
+ 이걸 보며 따라중. 
+ 
+ ## 파일 복사
+ 리눅스의 scp 커맨드로 파일을 복사할 수 있다. 
+ ec2 경로
+ /home/ec2-user/dilettante
+ 
+ > $ scp -r /c/Users/O/Desktop/dilettante/nuxt-auth/* ec2:~/dilettante
+ 
+ 상기 커맨드로 복사한다. node_modules는 크니까 뺐다. 
+ 
+ 
+ ࠀ| 10:06 2019-04-10
+ [ npm run build 91% 문제를 해결하자]
+ 
+ 91% 문제가 발생했다. 
+ webpack.config.js를 설정해줘야 하는데 난 nuxt니까
+ nuxt.config.js.
+ webpack이 뭔데? -> 모듈을 하나로 묶는다. entry에서 진입하고 output에 모듈을 번들한 결과물을 기록한다. 
+ npm run build는 build 명령어를 실행하라는거고 이건 nuxt build라고 지금 config에 써있다. build하면? 움.. 모르겠지만 .nuxt의, dist에, 생성되는 것 같다. 그래 이건 production 모드에서 시작되지. 
+
+ https://cmty.app/nuxt/nuxt.js/issues/c2535
+ 여기에 나온 
+ 1번 해결책: feryardiant의 방법. 실패했다. cache: '/path/to/cache/dir'를 추가안해주기는 했지만. 
+ 2번해결책. terser를 쓰는 것 같은데, nuxt.config.js에 어떻게 import해? 빨간줄뜨는데. 
+ 
+ 한 개 더 생각해보면, 1도 2도 아닌 build한 것만 실행해주는 방법도 있을 듯. 이건.. 
+ 
+ 2번. TerserPlugin 사용하기. 
+ -> 안됐다. 
+ 
+ 왜 이렇게 안되는지 알 수가 없을 도로 안되네
+ 그냥 빌드한걸 돌리면 안되는건가
+ 
+ 말하자면 메모리가 부족하다는 것 같다. 
+ 
+ 빌드만 로컬에서 하고 deploy는 (전개?) 서버에서 하려고 했는데 안된다. dist폴더 안에 없다. 왜일까? ㅠ 
+ -> dist를 억지로 따로 옮겨줬다. 왜인지는 모르겠다... 생각해볼 것. 
+ 이제 nginx하자. 
+ 
+ 어렵지 않아보임. 
+ 도메인 고민하자. 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
 page1. SingleAlbumFullView 기본은 그 싱글컴포넌트 기반으로 한다. 
 1. 앨범커버 전부 나오기
 2. 기타정보 레이블 등 나오기
@@ -552,3 +614,5 @@ page2. edit인데 edit은 addpage에서 albumid를 get파라미터로 받고 처
  [issuses]
  - 결국 권한문제가 내 발목을 잡을 것. 누구나 users에 graphql 보내면 비밀번호 빼고 다 알 수 있다. 이건 문제다.. 이메일도 알 수 있고 그런거다. 
  - 내 접근이 잘못되었나? users에 대한 부분은 그런 것 같다. 서버에 직접 접근하고싶은데 ㅠ 그러려면 역시 직접 핸들러를 만들어야 한다. 그리고 필요없는 정보는 내가 핸들러에서 빼면 되겠다 ㅇㅋ. 
+
+ 
