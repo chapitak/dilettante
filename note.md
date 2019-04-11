@@ -587,8 +587,56 @@ iii) 싱글앨범뷰 정리(전체보기에서 클릭하면 넘어가는 것)
  어렵지 않아보임. 
  도메인 고민하자. 
  
- 
+ --
+ git user로 돌리자. 
 
+
+ࠀɄ 1:54 2019-04-11
+어디에 systemctl이 있을텐데. 
+우선 실행되는것부터 보자. 아마 a.go아닌가? 
+훔 아니다. a.go는 어떻게 되는거지? 
+
+뭐 어떻게 정지된 것 같은데 nginx 돌려볼까. 
+
+
+
+sudo vi /etc/nginx/sites-available/jeongkyo.kim
+
+server {
+    listen 80;
+    listen [::]:80;
+    index index.html;
+    server_name jeongkyo.kim;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+sudo ln -sf /etc/nginx/sites-available/jeongkyo.kim /etc/nginx/sites-enabled/jeongkyo.kim
+
+아직 안되는거 보니까 문제 있는 것 겉어. 
+
+하.. sites-available 등은 ubuntu 등에서 설치했을때인 것같고
+centos에서 난 yum으로 헀으니까 다른 세팅인가봄. 
+
+nginx 1.12 버전인데
+include 해도 nginx.conf에 server 블럭이 있다. 여기 default_server라고 써있어서 여기로 가는듯. 
+
+1. 91%에서 빌드가 멈추는 문제. 
+2. centos, 1.2 버전의 nginx에서의 세팅 문제. 
+
+너무 재미있었다. 왜 되는지 그런 것 하나도 모르겠지만. 
+기본 세팅이 defaullt_server로 막 써있고 그런 셋팅이었다. 
+
+--
+배포. 배포를 고민해봐야겠다. 
+jenkins? 
 
 
 
