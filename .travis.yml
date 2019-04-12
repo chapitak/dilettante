@@ -2,6 +2,9 @@ language: node_js # 언어는 node_js
 node_js:
   - "8.12" # node_js에 버전 10.14
 before_install: # 패키지를 다운로드 받기 전
+
+before_script:
+  - cd nuxt-auth
 branches:
   only:
     - master
