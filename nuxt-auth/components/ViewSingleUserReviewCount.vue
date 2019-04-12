@@ -1,6 +1,6 @@
 <template>
   <div class="ViewSingleUserReviewCount">
-    <div class="container text-xs-center">
+    <div class="text-xs-center">
         <b>{{this.username}}</b>&nbsp;&nbsp;{{reviewCount}} 개
     </div>
   </div>

@@ -4,7 +4,7 @@
         <br>
         <template>
         <v-layout>
-          <v-flex xs12 sm6 offset-sm3>
+          <v-flex xs12>
             <v-card>
               <div class="pa-2"> <span>&nbsp;&nbsp;&nbsp;<b>{{reviewer_name}}</b></span></div>
               <v-parallax :src="parallax_src" height="120"></v-parallax>

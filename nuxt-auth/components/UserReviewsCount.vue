@@ -3,6 +3,7 @@
     
     <div class="container">
       <div><h1 class="title text-xs-center"><b>통계</b></h1></div>
+      <br>
       <div v-for="user in users" :key="user.key">
         <ViewSingleUserReviewCount :userId="user.key" :reviewCount="user.connection.aggregate.count" />
       </div>
