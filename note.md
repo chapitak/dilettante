@@ -638,12 +638,81 @@ include 해도 nginx.conf에 server 블럭이 있다. 여기 default_server라�
 배포. 배포를 고민해봐야겠다. 
 jenkins? 
 
+할 일이 너무 많은데 일단 하나씩 적어나가자. 
+i) 여기서 배포 고민하기 
+
+[배포 완성]
+https://velog.io/@jeff0720/Travis-CI-AWS-CodeDeploy-Docker-%EB%A1%9C-%EB%B0%B0%ED%8F%AC-%EC%9E%90%EB%8F%99%ED%99%94-%EB%B0%8F-%EB%AC%B4%EC%A4%91%EB%8B%A8-%EB%B0%B0%ED%8F%AC-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0
+
+상기 링크 보고. 
+
+우선 트래비스에 연동은 했는데 aws는 IAM 생성해주는 것두 있고 해서 나중에 해야겠다. 
+빌드를 이쪽에서 해서 -> 보내고 하는 과정까지. 
+nuxt 통째로 가자. spa가 아니니까, ssr이 있으니까. 
+---------------
 
 
+https://velog.io/@jeff0720/Travis-CI-AWS-CodeDeploy-Docker-%EB%A1%9C-%EB%B0%B0%ED%8F%AC-%EC%9E%90%EB%8F%99%ED%99%94-%EB%B0%8F-%EB%AC%B4%EC%A4%91%EB%8B%A8-%EB%B0%B0%ED%8F%AC-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0
 
+이거참고해서 만들자. 
 
+그런 면에서 조광일이 치사하다고 생각했음. 설명해주는 것만큼 좋은공부법이 없기 떄문이다. 누구나 자기만의 러버덕이 필요하다. 조광일의 러버덕으로 인생을 허비할 수는 없다 (물론 조광일의 러버덕이 되는 것은 좋은 경험이다)
 
+-일단 음악만으로 하는건 어떤가? 아직 불완전하다. 뭐가 더 필요함. 
+main페이지가 불완전하다. 최신입력이랑, 전체보기가 한 번에 나올 수 없나? 
+앗 생각났다 열기로 할까? 아니다... 일단 혼자 쓸 때는 여기까지로 하자. 
 
+- 왜 갑자기 폭이 좁아졌지
+
+ࠀ| 10:23 2019-04-12
+브랜치 전환은 git checkout이다. 
+- img로 전환. 300으로 되나요? 
+이건있지 flexbox로 하면 되는걸.. 항상 알고있었잖아? 
+
+대리님 ip 관련 부분 출력되도록 변경하고 추가/삭제도 되게 했는데 이따 확인해주세요
+
+text는 좌측정렬인데 div가 센타정렬하고싶어. 
+
+review-comment.vue을 만들고 따로 만들어야 하나? 
+relation이 post랑도, review랑도 가지게 하자. 
+여기서부터 시작. 
+content
+user
+post
+review
+[2019-04-12T06:36:58.646Z] error Something went wrong in the model `Post` with the attribute `comments`
+[2019-04-12T06:36:58.652Z] error Cannot read property 'attributes' of undefined
+[ec2-user@ip-172-31-17-227 strapi-viatrix]$
+
+ࠀɄ 4:10 2019-04-12
+방금은 Comment를 생성했었는데, 좀 이상했다. 문제가 있었다 그리고 아직 해결되지 않았다. 
+1. 우선 relation이 있던 부분들 때문에 서버 시작이 안돼서, api에서 해당 model(comment)를 지워주고, [모델명].setting.json 에서 relation있던부분들을 다 지워줬다. 그리고 content-type-build plugin에 있는 것도 지워주고 나니 어떻게 서버가 시작은 됐다. 근데 좌측 바에는 아직 남아있고 mongodb에 들어가서 
+
+몽고db실행
+$ mongo
+use [db명]
+show collections (콜렉션 확인)
+여기서 db.comment.drop()으로 콜렉션을 지워줬지만 여전히 보이지 않는다. 
+
+core어쩌구 하는 콜렉션에 comment의 흔적이 남아있지만 더이상 건드리지 않기로 한다. comment말고 새로운 이름으로 생성할 것. 중고DB를 써서그런 것 같다
+
+commen으로 해야겠다 ㅋ
+시부엉.. 자꾸 에러가 발생하네 commen으로 다시 만들었는데두 
+
+pm2 start strapi --no-automation --name {{app name}} -- start
+어휴.. pm2 strapi 시작할 때는  무조건 이걸로 해주자. 멍청한놈.. 
+
+아이구.. 겨우 해결했네. 
+
+review 
+
+comment 달았다 작동되는지는 모르겠지만. 
+pa ma-0을 달아야겠다. 
+우옹.. 훌륭하게 해냈다. 
+
+앗 알겠다 
+axios변경, 
+프로필 id 가져오는 것 변경 필요. 
 
 
 
@@ -662,5 +731,6 @@ page2. edit인데 edit은 addpage에서 albumid를 get파라미터로 받고 처
  [issuses]
  - 결국 권한문제가 내 발목을 잡을 것. 누구나 users에 graphql 보내면 비밀번호 빼고 다 알 수 있다. 이건 문제다.. 이메일도 알 수 있고 그런거다. 
  - 내 접근이 잘못되었나? users에 대한 부분은 그런 것 같다. 서버에 직접 접근하고싶은데 ㅠ 그러려면 역시 직접 핸들러를 만들어야 한다. 그리고 필요없는 정보는 내가 핸들러에서 빼면 되겠다 ㅇㅋ. 
+ - review에서 여러줄을 쓰려면 어떻게해? 그냥해도 되나? 테스트. 
 
  
