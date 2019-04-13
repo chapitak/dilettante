@@ -722,11 +722,14 @@ IAM Role 두 개 만듦. 하나는 EC2용, 하나는 Code Deploy용.
 
 3. 내 ec2에 해당 IAM을 연동하고 code deploy를 어떻게 설치했다. 
 
+4. code deploy에 배포그룹 생성. 
 
 https://jojoldu.tistory.com/265
 
+code deploy가 실행되지 않음. 
 
-
+왜일까? deploy group이랑 매칭이 되는 ec2 인스턴스가 없다고 한다. 
+매칭되도록 해보자. 
 
 
 page1. SingleAlbumFullView 기본은 그 싱글컴포넌트 기반으로 한다. 
