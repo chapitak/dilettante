@@ -731,6 +731,13 @@ code deploy가 실행되지 않음.
 왜일까? deploy group이랑 매칭이 되는 ec2 인스턴스가 없다고 한다. 
 매칭되도록 해보자. 
 
+ec2에는 dilettante-code-deploy-role IAM 역할이다. 
+04131806
+하하, 알았따. ec2 서버에 네임태그를 안 붙여서 그렇다. 원숭이처럼 따라만 하니까 그렇지... 
+ 
+
+
+
 
 page1. SingleAlbumFullView 기본은 그 싱글컴포넌트 기반으로 한다. 
 1. 앨범커버 전부 나오기
