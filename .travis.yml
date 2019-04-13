@@ -8,7 +8,9 @@ before_install: # 패키지를 다운로드 받기 전
 
 before_script:
   - cd nuxt-auth
-before_deploy: #배포하기 전 
+  - npm install
+  - npm run build
+before_deploy: #배포하기 전
   - rm -rf node_modules # travis가 설치한 node_moduels를 삭제
   - zip -r dilettante * # node-koa-server 라는 이름으로 zip 파일 생성
   - mkdir -p deploy # deploy 라는 디렉터리를 만듬
@@ -19,7 +21,7 @@ deploy: # 배포
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
     bucket: dilettante-for-deploy # S3에 생성한 버킷
     region: ap-northeast-2
-    skip_cleanup: true 
+    skip_cleanup: true
     local_dir: deploy # deploy 디렉터리에 있는 파일을 s3로 업로드 하겠다는 의미
     wait-until-deployed: true
     on:
@@ -38,7 +40,7 @@ deploy: # 배포
     on:
       repo: chapitak/dilettante
       branch: master
-notifications: # 성공 실패 여부 알림 
+notifications: # 성공 실패 여부 알림
   email:
     recipients:
       - chavitak@gmail.com
