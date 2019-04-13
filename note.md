@@ -714,6 +714,19 @@ pa ma-0을 달아야겠다.
 axios변경, 
 프로필 id 가져오는 것 변경 필요. 
 
+0413
+1. IAM 사용자를 만들고 credentials.csv를 받았다. 
+
+2. 방금 aws IAM 역할 두 개를 만들었다 뭔지도 모르곘다..
+IAM Role 두 개 만듦. 하나는 EC2용, 하나는 Code Deploy용. 
+
+3. 내 ec2에 해당 IAM을 연동하고 code deploy를 어떻게 설치했다. 
+
+
+https://jojoldu.tistory.com/265
+
+
+
 
 
 page1. SingleAlbumFullView 기본은 그 싱글컴포넌트 기반으로 한다. 
