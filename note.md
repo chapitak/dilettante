@@ -771,7 +771,7 @@ page1. SingleAlbumFullView 기본은 그 싱글컴포넌트 기반으로 한다.
 3. 코멘트 기능. 
 4. 작성자는 edit으로 이동가능하게 한다. 
 page2. edit인데 edit은 addpage에서 albumid를 get파라미터로 받고 처리할 것. 
-
+ 
 
  - google 로그인 기능
  - 좋아요 기능
