@@ -767,9 +767,16 @@ gutz
 
 현재문제. execute-deploy.sh가 실행되지 않는다. 
 
-너무 재미있다. shll script가 우선 실행되나 보고 실행 잘 되고 파일도 바꿔치기 잘 되면 pm2 서버를 restart 해주면 되는 것이다. 그래서 이젠 master branch를 push하면 바로 트래비스로 배포되니까 따로 개발브랜치를 꼭 만들어야 하는 것이다... 
+너무 재미있다. shll script가 우선 실행되나 보고 실행 잘 되고 파일도 바꿔치기 잘 되면 pm2 서버를 restart 해주면 되는 것이다. 그래서 이젠 master branch를 push하면 바로 트래비스로 배포되니까 따로 개발브랜치를 꼭 만들어야 하는 것이다... ㄱ
 
+서버 커맨드에서 pm2 restart 2하면 되는데 code deploy에서 sh exeecute-deploy.sh pm2 restart -> 하면 안되는 이유는 무엇일까? 
 
+pm2 kill -all && npm remove pm2 -g && npm install pm2 -g && pm2 update && pm2 --update-env
+극약처방. 상기 커맨드 실행하기. 
+
+- 그러니까 유저가 달라서 생기는 일인거다. iam인 해당 유저는 ec2-user와 같지 않으니까.
+https://stackoverflow.com/questions/6905697/how-to-run-script-as-another-user-without-password
+이런 실행을 sh를 돌려줘야 한다. 
 
 
 
