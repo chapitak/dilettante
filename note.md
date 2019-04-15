@@ -767,8 +767,7 @@ gutz
 
 현재문제. execute-deploy.sh가 실행되지 않는다. 
 
-
-
+너무 재미있다. shll script가 우선 실행되나 보고 실행 잘 되고 파일도 바꿔치기 잘 되면 pm2 서버를 restart 해주면 되는 것이다. 그래서 이젠 master branch를 push하면 바로 트래비스로 배포되니까 따로 개발브랜치를 꼭 만들어야 하는 것이다... 
 
 
 

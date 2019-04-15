@@ -2,7 +2,7 @@
   <section class="section">
     <div class="container text-xs-center" >
       <h1 class="title">Music Index</h1>
-      <v-btn @click="move('/album/view-all-album-reviews')">내 목록 전체보기(트래비스 테스트)</v-btn>
+      <v-btn @click="move('/album/view-all-album-reviews')">내 목록 전체보기(트래비스 테스트2)</v-btn>
       <!--<v-btn @click="move('/album/add-album-review')">쓰기</v-btn>-->
     </div>
     <div>
