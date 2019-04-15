@@ -763,7 +763,7 @@ ilovejh
 gutz
 아침
 
-
+저장경로를 바꾸어주었다 watching을 하고 있는지 모르겠다. 이대로 시스템이 반영돼서 작동이 되면 그냥 두고, 아니면 nmpm run start같은 것을 해주자. 
 
 page1. SingleAlbumFullView 기본은 그 싱글컴포넌트 기반으로 한다. 
 1. 앨범커버 전부 나오기
