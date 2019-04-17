@@ -27,7 +27,7 @@
       <template v-slot:items="props">
         <tr>
           <!-- @click="move()"차후에 이동하도록 하자. https://codepen.io/nsiggel/pen/KRdGgE-->
-          <td class="text-xs-center">{{ props.index + 1 }}</td>
+          <td class="text-xs-center">{{ (pagination.page-1)*pagination.rowsPerPage + props.index + 1 }}</td>
           <td class="text-xs-center">{{ props.item.rating }}</td>
           <td class="text-xs-center">{{ props.item.album.album_name }}</td>
           <td class="text-xs-center">{{ props.item.album.artist_name }}</td>
@@ -73,7 +73,7 @@ export default {
       headers: [
         { text: "순번", value: "index", align: "center", width: "1%" },
         {
-          text: "판점",
+          text: "☆",
           //align: 'left',
           sortable: true,
           value: "rating",
@@ -229,6 +229,15 @@ export default {
       this.reviews = result.data.data.reviews;
       this.pagination.totalItems = result.data.data.reviews.length;
       console.log(this.reviews);
+      this.reviews.sort(function(a, b) { // 오름차순
+      if(b.album.released_date > a.album.released_date) {
+        return 1;
+      }
+      if(a.album.released_date > b.album.released_date) {
+        return -1;
+      }
+      return 0;
+      });
     });
   }
 };

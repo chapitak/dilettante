@@ -3,8 +3,8 @@
       
         <br>
         <template>
-        <v-layout>
-          <v-flex xs12>
+        <v-layout justify-center>
+          <v-flex md8>
             <v-card>
               <div class="pa-2"> <span>&nbsp;&nbsp;&nbsp;<b>{{reviewer_name}}</b></span></div>
               <v-parallax :src="parallax_src" height="120"></v-parallax>

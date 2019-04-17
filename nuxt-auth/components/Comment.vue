@@ -15,7 +15,7 @@
                 <div style="width:100%" pa2>{{ comment.content }} 
                 
                     <v-icon @click="deleteComment(comment._id)" small color="red" style="float:right"
-                    v-if="$store.state.profile._id == comment.user._id"
+                    v-if="loggedInUser._id == comment.user._id"
                     >close</v-icon>  
                 </div>      
             </v-list-tile-content>
@@ -58,7 +58,9 @@
         <v-form >
             <!-- username 들어가야되는데 prop으로 받아오겠지? --> 
             <v-textarea
+            class="pa-0 ma-0"
             solo
+            rows="1"
             name="Conent Textarea"
             label="코멘트를 작성해주세요"
             v-model="comment"
@@ -79,6 +81,8 @@
 
 
 <script>
+import { mapGetters } from 'vuex'
+
   export default {
     name: 'Comment',
     props: ['props_post_id'],
@@ -88,10 +92,39 @@
           comments: []
         }
     },
-    
-    watch: {
-        props_post_id: function () {
-                this.$http({
+    computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+    },
+    // watch: {
+    //     props_post_id: function () {
+    //             this.$axios({
+    //             url: 'http://54.180.32.24:1337/graphql',
+    //             method: 'post',
+    //             data: {
+    //                 query: `
+    //                 query {
+    //                     comments(where: {review: "`+this.props_post_id+`"}) { 
+    //                         content,
+    //                         _id,
+    //                         user {
+    //                         username,
+    //                         _id
+    //                     },
+                        
+    //                     }
+    //                     } 
+    //                 `
+    //             }
+    //             }).then((result) => { 
+    //             //this.commentsdatsa = result.data.data.comments 
+    //             this.comments = result.data.data.comments
+    //             console.log(this.comments)
+    //             }); 
+    //         console.log(this.comments)
+    //     }
+    // },
+    mounted() {
+                this.$axios({
                 url: 'http://54.180.32.24:1337/graphql',
                 method: 'post',
                 data: {
@@ -112,18 +145,19 @@
                 }).then((result) => { 
                 //this.commentsdatsa = result.data.data.comments 
                 this.comments = result.data.data.comments
+                console.log(this.comments)
                 }); 
-            return null
-        }
+            console.log(this.comments)
     },
+    
     methods: {
         sendComment() {
         this.$axios.post(`http://jeongkyo.kim:1337/comments/`, {
             //post_id: this.props_post_id,
-            register_id: this.$store.state.profile._id,
+            register_id: this.loggedInUser._id,
             content: this.comment,
             review: this.props_post_id,
-            user: this.$store.state.profile._id
+            user: this.loggedInUser._id
         })
         .then(response => {
             // Handle success.
@@ -136,14 +170,14 @@
             // Handle error.
             console.log('An error occurred:', error);
         });
-        this.comments.push({content: this.comment, user: {username: this.$store.state.profile.username, _id: this.$store.state.profile._id}});
+        this.comments.push({content: this.comment, user: {username: this.loggedInUser.username, _id: this.loggedInUser._id}});
         this.comment = '';
         },
         deleteComment(cid) {
             console.log(cid)
             var r = confirm("정말 삭제하시곘습니까?")
             if(r==true) {
-                this.$http.delete(`http://jeongkyo.kim:1337/comments/` + cid)
+                this.$axios.delete(`http://jeongkyo.kim:1337/comments/` + cid)
                 .then/*(response => {
                     // Handle success.
                     console.log(

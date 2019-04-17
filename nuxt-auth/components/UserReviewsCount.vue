@@ -33,7 +33,7 @@ export default {
         query:
           `
             query {
-                reviewsConnection {
+                reviewsConnection(limit:5000) {
                     groupBy {
                     user {
                         key 
