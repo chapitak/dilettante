@@ -198,10 +198,10 @@ export default {
       url: "http://54.180.32.24:1337/graphql",
       method: "post",
       data: {
-        query:
+        query: // uid: 5be4e9f33d8f73560515f2fa
           `
             query {
-                reviews(where: {user: {_id: "` +
+                reviews(limit:5000 where: {user: {_id: "` +
           this.loggedInUser._id +
           `"} } ) {
                     _id
