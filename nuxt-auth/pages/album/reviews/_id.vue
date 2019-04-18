@@ -59,12 +59,12 @@ export default {
   },
   data() {
     return {
-        artist_name: "언니네 이발관",
-        album_name: "후일담",
-        review_text: '5집보다 좋은 앨범이다. 동의하지 않는 사람과 논쟁하지 않겠다. 그는 논쟁할 가치가 없는 사람이기 때문이다.',
-        released_date: "2001-01-23",
-        rating: "4.0",
-        genre: "Rock",
+        artist_name: "",
+        album_name: "",
+        review_text: '',
+        released_date: "",
+        rating: "",
+        genre: "",
         parallax_src: "",
         reviewer_name: "",
         agency: "",

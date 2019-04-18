@@ -12,12 +12,15 @@
               :key="comment.index">
             <v-list-tile-content>
                 <v-list-tile-sub-title>{{comment.user.username}}</v-list-tile-sub-title>
-                <div style="width:100%" pa2>{{ comment.content }} 
-                
-                    <v-icon @click="deleteComment(comment._id)" small color="red" style="float:right"
-                    v-if="loggedInUser._id == comment.user._id"
-                    >close</v-icon>  
-                </div>      
+                    <v-layout  justify-space-around row>
+                        <div style="width:100%" pa2>{{ comment.content }} 
+                        </div>      
+                        <div v-if="isAuthenticated">
+                            <v-icon @click="deleteComment(comment._id)" small color="red" style="float:right"
+                            v-if="loggedInUser._id == comment.user._id"
+                            >close</v-icon>  
+                        </div>
+                    </v-layout>
             </v-list-tile-content>
                 <!--<div
                 :key="comment.index"
@@ -53,7 +56,7 @@
         </v-list>
     </div>
     
-    <div id="write-comment">
+    <div id="write-comment" v-if="isAuthenticated">
         <!--<v-form v-model="valid">-->
         <v-form >
             <!-- username 들어가야되는데 prop으로 받아오겠지? --> 
@@ -64,6 +67,7 @@
             name="Conent Textarea"
             label="코멘트를 작성해주세요"
             v-model="comment"
+            required
             >{{comment}}</v-textarea>
             <v-btn 
             
@@ -75,6 +79,10 @@
             </v-btn>
         </v-form>
         </div>     
+        <div v-else class="text-xs-center"> 
+            <br>
+        코멘트를 남기려면 로그인을 해주세요
+    </div>
     </div>
 </template>
 
@@ -152,6 +160,10 @@ import { mapGetters } from 'vuex'
     
     methods: {
         sendComment() {
+        if(this.comment == '') {
+            alert("내용을 먼저 작성해주세요")
+            return
+        }
         this.$axios.post(`http://jeongkyo.kim:1337/comments/`, {
             //post_id: this.props_post_id,
             register_id: this.loggedInUser._id,

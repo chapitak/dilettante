@@ -23,9 +23,9 @@
                 </div>
               </v-card-title>
 
-              <v-card-actions>
-                <v-btn flat color="orange"><v-icon light>audiotrack</v-icon> 6</v-btn>
-                <v-btn flat color="orange"><v-icon light>comment</v-icon> &nbsp;Comment</v-btn>
+              <v-card-actions class="justify-center">
+                <!-- <v-btn flat color="orange"><v-icon light>audiotrack</v-icon> 6</v-btn> -->
+                <v-btn style="width:100%;" flat color="orange" @click="move(reviewId)"><v-icon light>comment</v-icon> &nbsp;more</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -48,8 +48,12 @@ export default {
         genre: "Rock",
         parallax_src: "",
         reviewer_name: ""
-
     }
+  },
+  methods: {
+    move(target) {
+        this.$router.push("/album/reviews/" + target)
+    },
   },
   mounted() {
     this.$axios.get('http://jeongkyo.kim:1337/reviews/' + this.reviewId)
@@ -65,6 +69,7 @@ export default {
         this.released_date = response.data.album.released_date
         this.genre = response.data.album.genre
         this.rating = response.data.rating
+        this.reviewer_name = response.data.user.username
         this.reviewer_name = response.data.user.username
         this.parallax_src = "http://s3.ap-northeast-2.amazonaws.com/dilettante/" + response.data.album.album_id + ".jpg"
     })
