@@ -106,7 +106,12 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      { icon: 'album', text: 'Music', value: '/album' }
+      { icon: 'sync', text: '최신 글 보기', value: '/recent' },
+      { icon: 'library_books', text: '책', value: '/books' },
+      { icon: 'movie', text: '영상물', value: '/video' },
+      { icon: 'album', text: '음악', value: '/album' },
+      { icon: 'wb_incandescent', text: '개발 관련', value: '/dev' },
+      { icon: 'border_color', text: '일기', value: '/logbook' }
       /*{ icon: 'touch_app', text: 'Reminders' },
       { divider: true },
       { heading: 'Labels' },
