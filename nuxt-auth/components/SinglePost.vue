@@ -8,6 +8,7 @@
         </div>
       </div>
     </v-card>
+    <PostComment :props_post_id="postId"/>
     <br>    
   </div>
 
@@ -17,10 +18,12 @@
 
 <script>
 import MarkDownIt from 'markdown-it'
+import PostComment from '~/components/PostComment.vue'
 export default {
   name: 'post',
   props: ['postId'],
   components: {
+    PostComment
   },
   data() {
     return {
@@ -39,7 +42,7 @@ export default {
      var md = MarkDownIt()
      this.post.text = md.render(response.data.text)      
     })
-    .catch(e => {
+    .catch(e => { 
       this.errors.push(e)
     })  
     
@@ -50,7 +53,7 @@ export default {
 </script>
 
 <style  scoped>
-/*@import "../assets/markdown.css";*/
+@import "../assets/markdown.css";
 	.markdown-body {
 		box-sizing: border-box;
 		min-width: 200px;

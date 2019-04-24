@@ -44,7 +44,6 @@
     <div id="write-comment" v-if="isAuthenticated">
       <!--<v-form v-model="valid">-->
       <v-form>
-        <!-- username 들어가야되는데 prop으로 받아오겠지? -->
         <v-layout row>
           <v-flex grow>
             <v-textarea
@@ -122,7 +121,7 @@ export default {
         query:
           `
                     query {
-                        comments(where: {review: "` +
+                        comments(where: {post: "` +
           this.props_post_id +
           `"}) { 
                             content,
@@ -155,7 +154,7 @@ export default {
           //post_id: this.props_post_id,
           register_id: this.loggedInUser._id,
           content: this.comment,
-          review: this.props_post_id,
+          post: this.props_post_id,
           user: this.loggedInUser._id
         })
         .then(response => {
