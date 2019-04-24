@@ -107,7 +107,7 @@ export default {
     drawer: null,
     items: [
       { icon: 'sync', text: '최신 글 보기', value: '/recent' },
-      { icon: 'library_books', text: '책', value: '/books' },
+      { icon: 'library_books', text: '독서', value: '/books' },
       { icon: 'movie', text: '영상물', value: '/video' },
       { icon: 'album', text: '음악', value: '/album' },
       { icon: 'wb_incandescent', text: '개발 관련', value: '/dev' },

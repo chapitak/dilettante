@@ -3,7 +3,7 @@
     <v-card>
       <div class="markdown-body" >
         <h1>{{post.title}}</h1>
-        <span style="float:right">{{ String(post.createdAt).substring(0,10) }}</span>
+        <div><span style="float:right">{{ String(post.createdAt).substring(0,10) }}</span></div><br>
         <div v-html = "post.text">
         </div>
       </div>

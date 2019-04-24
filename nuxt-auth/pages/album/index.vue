@@ -1,13 +1,13 @@
 <template>
   <section class="section">
-    <div class="container text-xs-center" >
-      <h1 class="title">Music Index</h1>
-      <v-btn @click="move('/album/datatables/')">내 목록 전체보기</v-btn>
+    <div class="container text-xs-center" style="max-width:457.52px" >
+      <h1 class="title"><b>음악</b></h1>
+      <v-btn @click="move('/album/datatables/')" style="float:right;" flat class="pa-0">목록 전체보기</v-btn>
       <!--<v-btn @click="move('/album/add-album-review')">쓰기</v-btn>-->
     </div>
-    <div>
+    <!-- <div>
       <UserReviewsCount/>
-    </div>
+    </div> -->
     <div>
       <RecentReviews/>
     </div>
@@ -16,7 +16,7 @@
 
 <script>
 import RecentReviews from '~/components/RecentReviews'
-import UserReviewsCount from '~/components/UserReviewsCount'
+// import UserReviewsCount from '~/components/UserReviewsCount'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -27,7 +27,7 @@ export default {
   },
   components: {
     RecentReviews,
-    UserReviewsCount
+    // UserReviewsCount
   },
   mounted() {
   }, 

@@ -47,8 +47,7 @@
         <v-layout row>
           <v-flex grow>
             <v-textarea
-              class="pa-0 ma-0"
-              solo
+              class="pa-2 ma-0"
               rows="1"
               name="Conent Textarea"
               label="코멘트를 작성해주세요"
