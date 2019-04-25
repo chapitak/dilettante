@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-layout row wrap>
-      <v-btn icon flat small color="gray" href="/books" style="float:left;cursor:pointer">
-        <v-icon light>arrow_back</v-icon>&nbsp;
-      </v-btn>
+        <v-btn icon flat small color="gray" href="/books" style="float:left;cursor:pointer">
+            <v-icon light>arrow_back</v-icon>&nbsp;
+        </v-btn>
       <v-spacer></v-spacer>
     </v-layout>
      <v-data-table
@@ -82,7 +82,7 @@ export default {
         query: // uid: 5be4e9f33d8f73560515f2fa
           `
             query {
-            posts(limit: 5000 where: {type: "book"}) {
+            posts(limit: 5000 where: {type: "video"}) {
                 _id
                 title
                 created_date

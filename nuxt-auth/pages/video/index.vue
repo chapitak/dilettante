@@ -1,6 +1,7 @@
 <template>
   <section class="section">
     <div class="container">
+      <v-btn small flat href="/video/datatables" style="float:right;">목록 보기</v-btn> <br>
       <div><h1 class="title text-xs-center"><b>영상물</b></h1></div>
         <br>
       <div v-for="post in posts" :key="post._id">

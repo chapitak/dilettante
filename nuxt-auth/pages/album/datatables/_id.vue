@@ -1,6 +1,9 @@
 <template>
   <div>
     <v-layout row wrap>
+      <v-btn icon flat small color="gray" href="/books" style="float:left;cursor:pointer">
+        <v-icon light>arrow_back</v-icon>&nbsp;
+      </v-btn>
       <v-spacer></v-spacer>
       <v-flex xs2>
         <v-select v-model="search_filter_type" :items="filter_type" label="filter"></v-select>
