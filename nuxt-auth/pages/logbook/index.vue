@@ -1,14 +1,13 @@
 <template>
-  <div class="logbook" style="width:100%"> 
-    <v-container style="max-width: 800px;">
-        <v-timeline dense clipped align-top>
+  <div class="logbook" style="width:100%;max-width: 800px;"> 
+        <v-timeline dense clipped align-top class="px-0"> 
 
        
         <template
            v-for="(post, index) in posts"
              >
           <v-timeline-item
-            class="mb-3"
+            class="mb-3 "
             color="grey"
             small
             style="min-width:200px"
@@ -34,7 +33,6 @@
         </v-timeline>
         
         
-    </v-container>
   </div>
 </template>
 

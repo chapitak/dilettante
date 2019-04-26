@@ -47,6 +47,7 @@ export default {
             response.data
           );
           this.reviews = this.reviews.concat(response.data)
+          this.page = this.page + 1
       })
 
     }

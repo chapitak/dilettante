@@ -75,5 +75,8 @@ module.exports = {
   },
   plugins: [
     { src: '~plugins/MultiFilters.js'}
+  ],
+  css: [
+    '~assets/markdown.css'
   ]
 };

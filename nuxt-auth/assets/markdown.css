@@ -166,9 +166,9 @@
     margin: 0.67em 0;
   }
   
-  .markdown-body img {
+  /* .markdown-body img {
     border-style: none;
-  }
+  } */
   
   .markdown-body code,
   .markdown-body kbd,
