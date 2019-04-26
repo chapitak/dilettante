@@ -55,7 +55,7 @@
       </v-navigation-drawer>
       <v-toolbar color="amber" app absolute clipped-left dense>
         <v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
-        <nuxt-link to="/" tag="div" style="cursor:pointer;"><span class="title ml-3 mr-5">공사중~&nbsp;</span></nuxt-link>
+        <nuxt-link to="/" tag="div" style="cursor:pointer;"><span class="title ml-3">Jeongkyo Kim</span></nuxt-link>
         <v-spacer></v-spacer>
         <div v-if="isAuthenticated">
           <v-menu offset-y>
@@ -106,6 +106,7 @@ export default {
   data: () => ({
     drawer: null,
     items: [
+      { icon: 'account_circle', text: '소개', value: '/' },
       { icon: 'sync', text: '최신 글 보기', value: '/recent' },
       { icon: 'library_books', text: '독서', value: '/books' },
       { icon: 'movie', text: '영상물', value: '/video' },

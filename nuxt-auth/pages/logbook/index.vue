@@ -1,10 +1,12 @@
 <template>
+  <section class="section">
+  <v-layout  row wrap> 
   <div class="logbook" style="width:100%;max-width: 800px;"> 
         <v-timeline dense clipped align-top class="px-0"> 
-
-       
+        
         <template
            v-for="(post, index) in posts"
+           style="width:100%;"
              >
           <v-timeline-item
             class="mb-3 "
@@ -14,18 +16,21 @@
             v-bind:key="index"
           >
           <span @click="open(post.id)" style="cursor: pointer;"><b>{{ post.title}}</b></span>
-            <v-layout justify-space-between>
-              
-              <v-flex>
-                <span v-if = "post.id == selected_id">
+            
+              <v-flex xs12 md12>
+                <div v-if = "post.id == selected_id" >
                   <span style="white-space: pre-line;">
                     {{ post.text }}
                   </span>
-                  <PostComment :props_post_id="post.id"/>
+                  <v-layout row wrap>              
+                  <v-flex xs12 md4>
+                    <PostComment :props_post_id="post.id"/>
+                  </v-flex>
+                  </v-layout>
                   <!-- <logbookContent :props_post_id="selected_id">  </logbookContent> -->
-                </span>
+                </div>
               </v-flex>
-            </v-layout>
+            
           </v-timeline-item>
         
         </template>
@@ -34,6 +39,8 @@
         
         
   </div>
+  </v-layout>
+  </section>
 </template>
 
 <script>

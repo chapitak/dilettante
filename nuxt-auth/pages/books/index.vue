@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-      <v-btn small flat href="/books/datatables" style="float:right;">목록 보기</v-btn> <br>
+      <v-btn small flat href="/books/datatables" style="float:right;">목록 보기</v-btn> <br><br>
       <div><h1 class="title text-xs-center"><b>독서</b></h1></div>
         <br>
       <div v-for="post in posts" :key="post._id">
