@@ -28,7 +28,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios.get('http://jeongkyo.kim:1337/posts?_sort=createdAt:desc&_limit=' + this.paging)
+    this.$axios.get('http://jeongkyo.kim:1337/posts?type_ne=logbook&_sort=createdAt:desc&_limit=' + this.paging)
       .then(response => {
         // Handle success.
         console.log(
@@ -39,7 +39,7 @@ export default {
   }, 
   methods: {
       appendPosts() {
-      this.$axios.get('http://jeongkyo.kim:1337/posts?_sort=createdAt:desc&_limit=' + this.paging + '&_start=' + this.page*this.paging)
+      this.$axios.get('http://jeongkyo.kim:1337/posts?type_ne=logbook&_sort=createdAt:desc&_limit=' + this.paging + '&_start=' + this.page*this.paging)
         .then(response => {
           // Handle success.
           console.log(

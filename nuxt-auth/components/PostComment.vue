@@ -1,7 +1,7 @@
 <template>
   <div class="Comment pa-0 ma-0" v-if="props_post_id">
     <div id="read-comment">
-      <v-list style="background:#fafafa">
+      <v-list style="background:#fafafa" v-if="comments != ''">
         <template v-for="(comment, index) in comments">
           <!-- 정보가 있는 사용자 -->
           <v-list-tile v-if="comment.user != null" :key="comment.index">
@@ -40,14 +40,13 @@
         </template>
       </v-list>
     </div>
-
     <div id="write-comment" v-if="isAuthenticated">
       <!--<v-form v-model="valid">-->
       <v-form>
         <v-layout row>
           <v-flex grow>
             <v-textarea
-              class="pa-2 ma-0"
+              class="pr-0 ma-0"
               rows="1"
               name="Conent Textarea"
               label="코멘트를 작성해주세요"
