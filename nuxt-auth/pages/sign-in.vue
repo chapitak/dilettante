@@ -34,6 +34,7 @@
           <p>
             Don't have an account? <nuxt-link to="/register">Register</nuxt-link>
           </p>
+          <v-btn @click="$auth.loginWith('google')" block class="login-button">Login with google</v-btn>
         </div>
     </div>
   </section>

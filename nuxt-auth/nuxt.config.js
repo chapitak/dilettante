@@ -5,7 +5,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: "공사중",
+    title: "Jeongkyo Kim",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -60,6 +60,11 @@ module.exports = {
           user: { url: "users/me", method: "get", propertyName: "" },
           logout: false
         }
+      },
+      google: {
+        client_id:
+          '131112647070-ctj1d6eq52d99ue5gdjpfrebgqlqcljj.apps.googleusercontent.com',
+          userinfo_endpoint: 'users/me',
       }
     }
   },
