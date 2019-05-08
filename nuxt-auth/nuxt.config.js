@@ -62,9 +62,10 @@ module.exports = {
         }
       },
       google: {
-        client_id:
-          '131112647070-ctj1d6eq52d99ue5gdjpfrebgqlqcljj.apps.googleusercontent.com',
-          userinfo_endpoint: 'users/me',
+        endpoints: {
+          login: { url: "connect/google", method: "get", propertyName: "jwt" },
+          user: { url: "users/me", method: "get", propertyName: "" },
+          logout: false
       }
     }
   },
