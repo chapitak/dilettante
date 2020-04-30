@@ -21,7 +21,7 @@
     "core-util-is": "^1.0.2",
     "cors": "^2.8.5",
     "fs": "0.0.1-security",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "jsonp": "^0.2.1",
     "markdown-it": "^8.4.2",
     "material-design-icons-iconfont": "^4.0.5",
