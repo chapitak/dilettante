@@ -20,7 +20,7 @@ pylint==2.2.2
 pypiwin32==223
 python-dateutil==2.8.0
 pywin32==224
-PyYAML==3.13
+PyYAML==5.4
 requests==2.21.0
 rsa==3.4.2
 s3transfer==0.2.0
